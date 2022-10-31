@@ -1,0 +1,41 @@
+{
+  "name": "create-react-app-with-typescript",
+  "version": "5.0.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "latest",
+    "@reduxjs/toolkit": "^1.8.6",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "axios": "^1.1.3",
+    "formik": "^2.2.9",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "latest",
+    "typescript": "latest",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
