@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {Routes, Route, Link as RouterLink} from 'react-router-dom';
+import Link from '@mui/material/Link';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Link from '@mui/material/Link';
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   
@@ -10,6 +11,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 

@@ -27,6 +27,16 @@ const theme = createTheme({
           }
         }
       ]
+    },
+    MuiListItem: {
+      variants: [
+        {
+          props: { selected: true },
+          style: {
+            backgroundColor: 'rgba(41, 0, 0, 0.08)'
+          }
+        }
+      ]
     }
   }
 });

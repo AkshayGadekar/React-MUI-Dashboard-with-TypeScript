@@ -16,6 +16,7 @@ import apiEndPoints from "../apiEndPoints";
 import {log} from "../funcs/helpers";
 import {useNavigate} from "react-router-dom";
 import type {LoginProps} from "../types/pages"; 
+import logo from "../media/images/logo.svg";
 
 const Login = (props: LoginProps) => {
 
@@ -69,7 +70,7 @@ const Login = (props: LoginProps) => {
         <Box sx={{backgroundColor: "#fff", width: "35%", margin: "auto", textAlign: "center", 
         position: "relative", padding: 3, top: "100px", boxShadow: theme => theme.shadows[2],
         [theme.breakpoints.down("md")]: {width: "75%"},[theme.breakpoints.down("sm")]: {width: "100%"}}}>
-            <Box component="img" src="https://callqx-portal.ecosmob.net/static/img/logo.svg" 
+            <Box component="img" src={"https://callqx-portal.ecosmob.net/static/img/logo.svg"} 
             sx={{width: "50%", mb: 4}} ></Box>
             <form onSubmit={formik.handleSubmit}>
               <TextField
