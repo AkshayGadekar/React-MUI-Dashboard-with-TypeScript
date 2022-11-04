@@ -30,6 +30,9 @@ export interface ApiEndPoints {
         'logout': Record<string, any>
         'getUserDetails': Record<string, any>
     },
+    nodes: {
+        'list': Record<string, any>
+    },
     class: {
         'create': Record<string, any>
         'get': Record<string, any>

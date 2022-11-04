@@ -76,3 +76,11 @@ export const getProperValue = <T>(param: any, dataType: string): T => {
     return value;
 
 }
+
+export const getQueryString = (data: Record<string, any>) => Object.keys(data).map(key => key + '=' + (data[key as keyof typeof data])).join('&');
+
+export const encodedQueryString = (data: Record<string, any>) => {
+    return Object.keys(data).map((key) => {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+    }).join('&');
+}

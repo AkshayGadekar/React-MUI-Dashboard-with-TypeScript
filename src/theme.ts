@@ -15,6 +15,13 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        a: {
+          color: 'inherit'
+        },
+      },
+    },
     MuiLinearProgress: {
       variants: [
         {

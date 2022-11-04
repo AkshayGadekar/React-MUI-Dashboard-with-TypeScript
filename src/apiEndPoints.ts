@@ -18,9 +18,16 @@ const apiEndPoints: ApiEndPoints = {
             withCredentials: true
         },
         'getUserDetails': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
             method: 'get',
-            url: '/get-user',
+            url: '/user',
         },
+    },
+    nodes: {
+        'list': {
+            method: 'get',
+            url: '/nodes',
+        }
     },
     class : {
         'create': {

@@ -4,3 +4,4 @@ export const borderLabelToBlackOutlined = {InputProps: {sx: {"&.Mui-focused .Mui
 export const borderLabelToBlackStandard = {InputProps: {sx: {"&::after": {borderBottom: "2px solid #000000"}}}, 
 InputLabelProps: {sx: {"&.Mui-focused": {color: "#000"}}}};
 
+export const drawerWidth:number = Number(process.env.REACT_APP_DRAWER_WIDTH);

@@ -1,10 +1,13 @@
 import axios, {type AxiosRequestConfig} from 'axios';
 import {log} from "./funcs/helpers";
+import {useNavigate} from "react-router-dom";
+
+//const navigate = useNavigate();
 
 export const requestController = new AbortController();
 
 export const guestAxios = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL: process.env.REACT_APP_BASE_URL_CALLQX,
     headers: {'Accept': 'application/json'}
 });
 
@@ -18,7 +21,7 @@ if(typeof window !== "undefined"){
 }*/
 
 const authAxios = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL: process.env.REACT_APP_BASE_URL_CALLQX,
     headers: {'Accept': 'application/json'}
 });
 
@@ -78,6 +81,7 @@ const booleanString = (str:string) => {
 }
 
 let progressBarShouldLoad:number;
+let progressTransitionEnd:EventListener;
 const loadProgressBar = (req: AxiosRequestConfig, percentCompleted: number, display: "block"|"none") => {
     
     let progressBarNode = document.getElementById("topProgressBar")!;
@@ -86,27 +90,27 @@ const loadProgressBar = (req: AxiosRequestConfig, percentCompleted: number, disp
         progressBarNode = req.progressBarNode;
         progressNode = progressBarNode.childNodes[0] as HTMLElement;
     }
-
+    
     progressBarShouldLoad = percentCompleted-100;
     if (display == "block") {
         progressBarNode.style.visibility = "visible";
     }
-
-    progressNode.style.transform = `translateX(${progressBarShouldLoad}%)`;
-
+    
     if (display == "none") {
-        progressNode.addEventListener('transitionend', completeProgressBarLoading
-        .bind(this, progressBarNode).bind(this, progressNode));
+        progressTransitionEnd = completeProgressBarLoading.bind(this, progressBarNode).bind(this, progressNode);
+        progressNode.addEventListener('transitionend', progressTransitionEnd);
     }
-
+    
+    progressNode.style.transform = `translateX(${progressBarShouldLoad}%)`;
 }
 
 const completeProgressBarLoading = (progressBarNode: HTMLElement, progressNode: HTMLElement) => {
-    //log("progressBarShouldLoad", progressBarShouldLoad);
-    if (!progressBarShouldLoad) {
+    const isProgressCompleted = /translateX\(0%\)/.test(progressNode.style.transform);
+    if (!progressBarShouldLoad || isProgressCompleted) {
         progressBarNode.style.visibility = "hidden";
         progressNode.style.transform = `translateX(-100%)`;
         //remove event listner if needed
+        progressNode.removeEventListener('transitionend', progressTransitionEnd);
     }   
 }
 
@@ -128,16 +132,17 @@ authAxios.interceptors.response.use(response => {
     }
     
     //if 401 error
-    if(error.response.status == 401){
+    if(error.response.status == 401 || error.response.status == 403){
         log("login again");
         clearAuth();
         //throw at homepage
+        //navigate('/login', {replace: true});
     }   
 
     return Promise.reject(error);
 });
 
-const clearAuth = () => {
+export const clearAuth = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('expires_in');
     localStorage.removeItem('refresh_token');

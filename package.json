@@ -7,6 +7,7 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "latest",
+    "@mui/x-data-grid": "^5.17.9",
     "@reduxjs/toolkit": "^1.8.6",
     "@types/react": "latest",
     "@types/react-dom": "latest",

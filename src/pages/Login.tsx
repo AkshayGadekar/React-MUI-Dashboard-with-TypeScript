@@ -11,18 +11,20 @@ import {useFormik}  from 'formik';
 import * as Yup from 'yup';
 import CircularProgress from '@mui/material/CircularProgress';
 import withAxios from "../HOC/withAxios";
-import authAxios, {guestAxios, requestController} from "../axios";
+import {guestAxios} from "../axios";
 import apiEndPoints from "../apiEndPoints";
 import {log} from "../funcs/helpers";
 import {useNavigate} from "react-router-dom";
-import type {LoginProps} from "../types/pages"; 
+import type {LoginProps} from "../types/pages";
+import {useAppDispatch} from '../store/hooks';
+import {loggedIn} from '../store/slices/userSlice'; 
 import logo from "../media/images/logo.svg";
 
 const Login = (props: LoginProps) => {
 
   const theme = useTheme();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  console.log("Login-rendered");
 
   interface InitialValues {
     email: string, password: string
@@ -38,19 +40,18 @@ const Login = (props: LoginProps) => {
             const successResponse = res.data;
             localStorage.setItem("access_token", successResponse.access_token);
             localStorage.setItem("expires_in", successResponse.expires_in);
-            //localStorage.setItem("refresh_token", successResponse.refresh_token);
+            localStorage.setItem("refresh_token", successResponse.refresh_token);
 
             const expires_in_time = new Date();
             expires_in_time.setSeconds(expires_in_time.getSeconds() + successResponse.expires_in);
             localStorage.setItem("expires_in_time", expires_in_time.toString());
 
-            //redirect to class page
-            navigate('/home', {replace: true});
+            dispatch(loggedIn(true));
+
+            
             
         }).catch((error) => {
             props.processAxiosError<InitialValues>(error, props, formik);
-        }).finally(() => {
-            formikBag.setSubmitting(false);
         });
 
     },
@@ -89,6 +90,7 @@ const Login = (props: LoginProps) => {
                 {...formik.getFieldProps('email')} 
                 error={EmailTouchedError} 
                 helperText={EmailTouchedError && formik.errors.email}
+                autoComplete="on"
               />
               <TextField
                 id="password"
@@ -107,6 +109,7 @@ const Login = (props: LoginProps) => {
                 {...formik.getFieldProps('password')} 
                 error={PasswordTouchedError} 
                 helperText={PasswordTouchedError && formik.errors.password}
+                autoComplete="on"
               />
               <Button type="submit" variant="contained" fullWidth sx={{color: "#fff"}}
               disabled={!(formik.dirty && formik.isValid) || formik.isSubmitting}>
