@@ -9,7 +9,6 @@ import Drawer from "./components/structure/Drawer";
 import Content from "./components/structure/Content";
 import { useAppSelector, useAppDispatch } from './store/hooks';
 import {log} from './funcs/helpers';
-import {fetchUser} from "./store/slices/userSlice";
 import FetchUser from "./components/utilities/FetchUser";
 
 interface Props {
@@ -49,16 +48,16 @@ export default function App(props: Props) {
         (
           Object.keys(user).length 
           ?
-          <> 
-            <Header handleDrawerToggle={handleDrawerToggle} hideDrawer={hideDrawer} />
-            <Drawer container={container} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} hideDrawer={hideDrawer} />
-            <Content hideDrawer={hideDrawer} />
-          </>
+            <> 
+              <Header handleDrawerToggle={handleDrawerToggle} hideDrawer={hideDrawer} />
+              <Drawer container={container} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} hideDrawer={hideDrawer} />
+              <Content hideDrawer={hideDrawer} />
+            </>
           : 
-          <FetchUser />
+            <FetchUser />
         )
       :
-      <Guest />
+        <Guest />
       }
     </Box>
   );

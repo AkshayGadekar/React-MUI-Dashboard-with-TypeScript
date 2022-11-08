@@ -47,11 +47,11 @@ const Login = (props: LoginProps) => {
             localStorage.setItem("expires_in_time", expires_in_time.toString());
 
             dispatch(loggedIn(true));
-
-            
             
         }).catch((error) => {
             props.processAxiosError<InitialValues>(error, props, formik);
+        }).finally(() => {
+          formikBag.setSubmitting(false);
         });
 
     },

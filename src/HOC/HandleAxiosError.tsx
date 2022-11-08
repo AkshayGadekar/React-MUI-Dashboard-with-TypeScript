@@ -15,7 +15,6 @@ const HandleAxiosError = (props: AxiosErrorProps) => {
         
         setShowSnackBar(false);
     };
-    log("Handle Axios Error rendered");
 
     return (
         <>

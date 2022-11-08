@@ -31,12 +31,12 @@ export interface ApiEndPoints {
         'getUserDetails': Record<string, any>
     },
     nodes: {
-        'list': Record<string, any>
+        'list': Record<string, any>,
+        'edit': Record<string, any>
+        'update': Record<string, any>
     },
     class: {
-        'create': Record<string, any>
         'get': Record<string, any>
-        'uploadCoverPhoto': Record<string, any>
     }
 }
 

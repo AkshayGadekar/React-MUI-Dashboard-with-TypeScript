@@ -1,5 +1,6 @@
 import axios, {type AxiosRequestConfig} from 'axios';
 import {log} from "./funcs/helpers";
+import nProgress from "nprogress";
 import {useNavigate} from "react-router-dom";
 
 //const navigate = useNavigate();
@@ -71,6 +72,11 @@ authAxios.interceptors.request.use(async(req) => {
             }
         }
     }
+
+    //if not formData
+    if (!(req.data instanceof FormData) && req.showProgressBar) {
+        nProgress.start();
+    }
     
     req.headers!.authorization = `Bearer ${localStorage.getItem("access_token")}`;
     return req;
@@ -120,6 +126,7 @@ authAxios.interceptors.response.use(response => {
     if (response.config.showProgressBar) {
         const percentCompleted = 100;
         loadProgressBar(response.config, percentCompleted, "none");
+        nProgress.done();
     }
 
     return response;
@@ -129,6 +136,7 @@ authAxios.interceptors.response.use(response => {
     if (error.config.showProgressBar) {
         const percentCompleted = 100;
         loadProgressBar(error.config, percentCompleted, "none");
+        nProgress.done();
     }
     
     //if 401 error

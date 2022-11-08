@@ -41,7 +41,7 @@ export const getVarName = (variable: string): string => Object.keys({variable})[
 export const getBasicSnackBarInfo = (extraInfo:Record<string,any>={}): SnackbarInfo => {
     
     return {key: Math.random(), message: "", severity: "error", 
-    vertical: "bottom", horizontal: "right", duration: 6000, 
+    vertical: "bottom", horizontal: "right", duration: 5000, 
     variant: "filled", elevation: 6, width: '100%', ...extraInfo}
 }
 
@@ -83,4 +83,42 @@ export const encodedQueryString = (data: Record<string, any>) => {
     return Object.keys(data).map((key) => {
         return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
     }).join('&');
+}
+
+export const isLinkSame = (dynamicLink: string, actualLink: string): boolean => {
+    let link1ToArray = dynamicLink.split('/');
+    let link2ToArray = actualLink.split('/');
+    
+    if (link1ToArray.length == link2ToArray.length) {
+        const dynamicIndices: number[] = [];
+        
+        link1ToArray = link1ToArray.filter((linkSlice, index) => {
+            if (/:.+/i.test(linkSlice)) {
+                dynamicIndices.push(index);
+                return false;
+            }
+            return true;
+        });
+        link2ToArray = link2ToArray.filter((linkSlice, index) => !dynamicIndices.includes(index));
+        
+        const newLink1 = link1ToArray.join('/');
+        const newLink2 = link2ToArray.join('/');
+        
+        return newLink1 === newLink2;
+    }
+    
+    return false;
+}
+
+export const replaceDynamicParamInHref = (dynamicLink: string, dynamicParams: string[]) => {
+    let linkToArray: string[] = dynamicLink.split('/');
+    let noOfdynamicParams = 0;
+    linkToArray = linkToArray.map((linkSlice, index) => {
+        if (/:.+/i.test(linkSlice)) {
+            linkSlice = dynamicParams[noOfdynamicParams];
+            noOfdynamicParams++;
+        }
+        return linkSlice;
+    });
+    return linkToArray.join('/');
 }

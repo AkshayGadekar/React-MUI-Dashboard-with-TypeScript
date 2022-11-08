@@ -28,7 +28,8 @@ export interface SnackbarProps {
 export interface Menu {
     label: string,
     icon: React.ComponentType<MenuItemIconProps>,
-    href?: string
+    href?: string,
+    otherHrefs?: Record<string, any>
 }
 export interface MainMenu extends Menu {
     children?: Menu[]
@@ -41,11 +42,13 @@ export interface MenuItemIconProps {
 export interface MenuItemProps<T> {
     label: string,
     icon: React.ComponentType<T>,
-    href?: string
+    href?: string,
+    otherHrefs?: Record<string, any>,
 }
 
-export interface TableTitleProps {
-    title: string
+export interface HeadingProps {
+    title: string,
+    button?: Record<string, any>
 }
 
 export interface BreadcrumbProps {

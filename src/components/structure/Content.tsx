@@ -11,7 +11,8 @@ const Content = ({hideDrawer}: ContentProps) => {
     return (
         <Box
             component="main"
-            sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${!hideDrawer ? drawerWidth : 0}px)` } }}
+            sx={{ backgroundColor: 'rgba(0,0,0,0.02)', width: { sm: `calc(100% - ${!hideDrawer ? drawerWidth : 0}px)` }, 
+            height: '100vh',flexGrow: 1, p: 3 }}
         >
             <Toolbar />
             <Routes />

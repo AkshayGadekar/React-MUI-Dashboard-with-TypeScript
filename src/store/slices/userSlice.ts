@@ -7,15 +7,8 @@ import {clearAuth} from '../../axios';
 
 const initialState: UserSlice = {
   isLoggedIn: null,
-  user: {},
-  loading: false,
-  error: ''
+  user: {}
 }
-
-// Generates pending, fulfilled and rejected action types
-export const fetchUser = createAsyncThunk('user/fetchUser', () => {
-  return authAxios({...apiEndPoints.auth.getUserDetails}).then(response => response.data);
-})
 
 const userSlice = createSlice({
   name: 'user',
@@ -30,24 +23,6 @@ const userSlice = createSlice({
     gotUser: (state, action) => {
       state.user = action.payload;
     }
-  },
-  extraReducers: builder => {
-    builder.addCase(fetchUser.pending, state => {
-      state.loading = true
-    })
-    builder.addCase(
-      fetchUser.fulfilled,
-      (state, action: PayloadAction<User>) => {
-        state.loading = false
-        state.user = action.payload
-        state.error = ''
-      }
-    )
-    builder.addCase(fetchUser.rejected, (state, action) => {
-      state.loading = false
-      state.user = {}
-      state.error = action.error.message || 'Something went wrong'
-    })
   }
 })
 

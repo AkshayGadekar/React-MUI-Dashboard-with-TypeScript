@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import withAxios from '../../HOC/withAxios';
 import type {FetchUserProps} from '../../types/utilityComponents';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { fetchUser, loggedIn, gotUser } from '../../store/slices/userSlice';
+import { loggedIn, gotUser } from '../../store/slices/userSlice';
 import DesktopLoader from './DesktopLoader';
 
 const FetchUser = (props: FetchUserProps) => {
@@ -17,6 +17,7 @@ const FetchUser = (props: FetchUserProps) => {
         .then(res => {
             const successResponse = res.data;
             console.log('successResponse', successResponse);
+            dispatch(loggedIn(true));
             dispatch(gotUser(successResponse));
         })
         .catch(error => {

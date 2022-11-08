@@ -9,6 +9,10 @@ import CheckIcon from '@mui/icons-material/Check';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import type {TableProps} from '../../types/utilityComponents';
+import menus from '../../objects/menus';
+import {replaceDynamicParamInHref} from '../../funcs/helpers';
+
+const editActionHref = menus[4].otherHrefs!.edit;
 
 const disables = {disableColumnMenu: true, sortable: false, flex: 1};
 
@@ -28,7 +32,7 @@ const columns: GridColDef[] = [
       {params.value ? 'Online' : 'Offline'}</Button>
   },
   { field: 'actions', headerName: 'Actions', ...disables,
-  renderCell: params =>  <Button size="small" color="primary" sx={{color: "#fff"}} component={Link} to={`nodes/edit/${params.row.uuid}`} variant="contained">View</Button> }
+  renderCell: params =>  <Button size="small" color="primary" sx={{color: "#fff"}} component={Link} to={replaceDynamicParamInHref(editActionHref, [params.row.uuid])} variant="contained">View</Button> }
 ];
 
 // const rows = [
@@ -68,11 +72,11 @@ export default function DataTable({data}: TableProps) {
   ];
 
   return (
-    <Box>
+    <Box sx={{backgroundColor: '#fff', boxShadow: theme => theme.shadows[1]}}>
       <DataGrid
         autoHeight
         getRowId={(row) => row._id}
-        sx={{borderTopLeftRadius: 0, borderTopRightRadius: 0}}
+        sx={{borderRadius: 0}}
         columns={columns}
         rows={rows}
         rowCount={4}

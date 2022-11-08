@@ -8,6 +8,10 @@ export interface LoginProps extends WithAxiosProps {
     
 }
 
-export interface NodeProps extends WithAxiosProps {
+export interface NodesListingProps extends WithAxiosProps {
+    
+}
+
+export interface NodesEditProps extends WithAxiosProps {
     
 }

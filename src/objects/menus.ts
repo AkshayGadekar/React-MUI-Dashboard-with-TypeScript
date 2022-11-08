@@ -27,7 +27,7 @@ const menus:MainMenu[] = [
             {
                 label: 'Queue',
                 icon: QueueMusicIcon,
-                href: '/experiences/queue/list'
+                href: '/experiences/queue/list',
             },
             {
                 label: 'Streaming',
@@ -49,7 +49,10 @@ const menus:MainMenu[] = [
     {
         label: 'Nodes',
         icon: AccountTreeIcon,
-        href: '/nodes/list'
+        href: '/nodes/list',
+        otherHrefs: {
+            edit: '/nodes/edit/:id' 
+        }
     },
     {
         label: 'Messaging',

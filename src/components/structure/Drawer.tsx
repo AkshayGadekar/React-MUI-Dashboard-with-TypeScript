@@ -12,6 +12,7 @@ import menus from "../../objects/menus";
 import MenuItem from '../utilities/MenuItem';
 import {drawerWidth} from "../../objects/objects";
 import type {DrawerProps} from "../../types/components";
+import {log} from "../../funcs/helpers";
 
 const Drawer = ({container, mobileOpen, handleDrawerToggle, hideDrawer}: DrawerProps) => {
   const DrawerMenus = (
@@ -27,7 +28,8 @@ const Drawer = ({container, mobileOpen, handleDrawerToggle, hideDrawer}: DrawerP
             let menuHTML: JSX.Element;
 
             if (menu.children == null) {
-              return menuHTML = <MenuItem key={index} href={menu.href} label={menu.label} icon={menu.icon} />;
+              return menuHTML = <MenuItem key={index} href={menu.href} otherHrefs={menu.otherHrefs} label={menu.label}
+               icon={menu.icon} />;
             }
             
             const subMenus = menu.children;
@@ -57,7 +59,7 @@ const Drawer = ({container, mobileOpen, handleDrawerToggle, hideDrawer}: DrawerP
               </AccordionSummary>
               <AccordionDetails>
                 {
-                  subMenus.map((submenu, subindex) => <MenuItem key={subindex} href={submenu.href} label={submenu.label} icon={submenu.icon} />)
+                  subMenus.map((submenu, subindex) => <MenuItem key={subindex} href={submenu.href} otherHrefs={menu.otherHrefs} label={submenu.label} icon={submenu.icon} />)
                 }
               </AccordionDetails>
             </Accordion>
@@ -65,7 +67,7 @@ const Drawer = ({container, mobileOpen, handleDrawerToggle, hideDrawer}: DrawerP
         }
       </List>
     </Box>
-  );
+  );log('Drawer rendered');
 
   return (
     <Box

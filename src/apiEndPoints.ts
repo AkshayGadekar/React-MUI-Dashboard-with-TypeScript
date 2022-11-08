@@ -27,13 +27,19 @@ const apiEndPoints: ApiEndPoints = {
         'list': {
             method: 'get',
             url: '/nodes',
+        },
+        'edit': {
+            method: 'get',
+            url: '/nodes/{id}',
+        },
+        'update': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'put',
+            url: '/nodes/{id}',
+            showProgressBar: true
         }
     },
     class : {
-        'create': {
-            method: 'post',
-            url: '/create-class',
-        },
         'get': {
             baseURL: process.env.REACT_APP_BASE_URL,
             method: 'get',
@@ -41,11 +47,7 @@ const apiEndPoints: ApiEndPoints = {
             /*urlParams: {
                 slug: "physics-9th-std"
             }*/
-        },
-        'uploadCoverPhoto': {
-            method: 'post',
-            url: '/upload-cover-photo/{slug}',
-        },
+        }
     }
 };
 export default apiEndPoints;

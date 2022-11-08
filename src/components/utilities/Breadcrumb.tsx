@@ -24,7 +24,7 @@ const Breadcrumb = (props: BreadcrumbProps) => {
 
   return (
     <Box role="presentation" onClick={handleClick} mb={1}>
-        <Breadcrumbs aria-label="breadcrumb">
+        <Breadcrumbs aria-label="breadcrumb" sx={{fontSize: '12px', "& .MuiBreadcrumbs-li > *":{fontSize: '12px'}}}>
             {totalPath.map((path, index) => {
                 if (path.link) {
                     return (
