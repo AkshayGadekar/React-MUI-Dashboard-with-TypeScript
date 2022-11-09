@@ -49,7 +49,12 @@ const theme = createTheme({
             height: '3px'
           }
         }
-      ]
+      ],
+      styleOverrides: {
+        root: {
+          height: '3px'
+        }
+      }
     },
     MuiListItem: {
       variants: [

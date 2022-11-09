@@ -37,6 +37,14 @@ const apiEndPoints: ApiEndPoints = {
             method: 'put',
             url: '/nodes/{id}',
             showProgressBar: true
+        },
+        'restartNodeService': {
+            method: 'post',
+            url: '/nodes/{id}/service/{name}/restart',
+        },
+        'updateNodeService': {
+            method: 'post',
+            url: '/nodes/{id}/service/{name}/update',
         }
     },
     class : {

@@ -14,10 +14,10 @@ import {replaceDynamicParamInHref} from '../../funcs/helpers';
 
 const editActionHref = menus[4].otherHrefs!.edit;
 
-const disables = {disableColumnMenu: true, sortable: false, flex: 1};
+const disables = {sortable: false, flex: 1};
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'Id', minWidth: 250, ...disables, renderCell: param => param.row._id },
+  { field: 'id', headerName: 'Id', minWidth: 250, ...disables, renderCell: params => params.row._id },
   { field: 'name', headerName: 'Name', minWidth: 250, ...disables },
   { field: 'type', headerName: 'Type', ...disables },
   { field: 'primary', headerName: 'Primary', ...disables, 
@@ -79,14 +79,14 @@ export default function DataTable({data}: TableProps) {
         sx={{borderRadius: 0}}
         columns={columns}
         rows={rows}
-        rowCount={4}
+        rowCount={rows.length}
         rowsPerPageOptions={[10]}
-        pageSize={4}
+        pageSize={10}
         //onPageSizeChange={(newPageSize) => console.log('newPageSize', newPageSize)}
         page={page}
         onPageChange={(newPage) => handlePageChange(newPage)}
-        //checkboxSelection
         disableSelectionOnClick
+        disableColumnMenu
       />
     </Box>
   );

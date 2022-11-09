@@ -15,6 +15,7 @@ import {isLinkSame} from "../../funcs/helpers";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import { useParams } from 'react-router-dom';
 import EditInfo from './components/EditInfo';
+import EditServices from './components/EditServices';
 import { Typography } from '@mui/material';
 
 const Edit = (props: NodesEditProps) => {
@@ -33,7 +34,6 @@ const Edit = (props: NodesEditProps) => {
 
   const param = useParams();
   const theme = useTheme();
-  console.log('param', param);
 
   useEffect(() => {
 
@@ -58,8 +58,6 @@ const Edit = (props: NodesEditProps) => {
       requestController.abort('Request aborted to clean up useEffect.');
     }
   }, []);
-
-  //return <EditSkeleton />;
   
   return (
     <Box>
@@ -82,7 +80,10 @@ const Edit = (props: NodesEditProps) => {
                 backgroundColor: '#fff', boxShadow: theme => theme.shadows[1]}}>
                   <Grid container direction="column" spacing={3}>
                     <Grid item>
-                      <TextField id="name" name="name" label="Name" variant="outlined" InputProps={{readOnly: true}} InputLabelProps={{ shrink: true }} value={data!.customers[0].company_name} fullWidth  />
+                      {
+                        data!.customers.map((customer: Record<string, any>, index: number) => 
+                        <TextField key={index} variant="outlined" InputProps={{readOnly: true}} value={customer.company_name} fullWidth  />)
+                      }
                     </Grid>
                   </Grid>
                 </Box>
@@ -91,7 +92,9 @@ const Edit = (props: NodesEditProps) => {
           </Grid>
           <Grid item xs={12} md={6} sx={{[theme.breakpoints.up('md')]: {paddingLeft: '1rem'}}}>
             <Grid container direction="column">
-                
+              <Grid item sx={{marginBottom: '1.5rem'}}>
+                <EditServices data={data!.services} />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

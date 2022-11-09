@@ -34,6 +34,8 @@ export interface ApiEndPoints {
         'list': Record<string, any>,
         'edit': Record<string, any>
         'update': Record<string, any>
+        'restartNodeService': Record<string, any>
+        'updateNodeService': Record<string, any>
     },
     class: {
         'get': Record<string, any>
