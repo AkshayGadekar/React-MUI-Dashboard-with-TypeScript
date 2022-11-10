@@ -65,7 +65,7 @@ const EditInfo = (props: NodesEditInfoProps) => {
             }
         }
     }
-    console.log('EditInfo rendered');
+    log('EditInfo rendered');
   
     return (
         <>

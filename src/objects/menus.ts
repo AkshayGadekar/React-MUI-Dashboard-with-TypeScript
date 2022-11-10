@@ -1,5 +1,5 @@
 import React from 'react';
-import type {MainMenu} from "../types/utilityComponents";
+import type {MainMenu} from "../types/components";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CallIcon from '@mui/icons-material/Call';
@@ -71,7 +71,10 @@ const menus:MainMenu[] = [
             {
                 label: 'Users',
                 icon: GroupIcon,
-                href: '/settings/users/list'
+                href: '/settings/users/list',
+                otherHrefs: {
+                    edit: '/settings/users/edit/:id' 
+                }
             },
             {
                 label: 'Roles',

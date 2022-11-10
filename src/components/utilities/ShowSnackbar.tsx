@@ -2,7 +2,7 @@ import React from "react";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import {getBasicSnackBarInfo} from "../../funcs/helpers";
-import {type SnackbarProps} from "../../types/utilityComponents";
+import {type SnackbarProps} from "../../types/components";
 
 const ShowSnackbar = (props: SnackbarProps) => {
     

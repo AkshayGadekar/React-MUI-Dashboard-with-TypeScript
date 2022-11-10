@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import {log} from "../../funcs/helpers";
 import {isLinkSame} from "../../funcs/helpers";
 import { useLocation } from 'react-router-dom';
-import type {MenuItemProps, MenuItemIconProps} from "../../types/utilityComponents";
+import type {MenuItemProps, MenuItemIconProps} from "../../types/components";
 
 const MenuItem = (props: MenuItemProps<MenuItemIconProps>) => {
   const theme = useTheme();

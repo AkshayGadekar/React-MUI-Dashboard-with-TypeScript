@@ -3,7 +3,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {type PasswordVisibleProps} from '../../types/utilityComponents';
+import {type PasswordVisibleProps} from '../../types/components';
 
 const MakePasswordVisible = (props: PasswordVisibleProps) => {
     

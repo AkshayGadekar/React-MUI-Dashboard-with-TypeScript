@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
-import type { HeadingProps } from '../../types/utilityComponents';
+import type { HeadingProps } from '../../types/components';
 
 const Heading = (props:HeadingProps) => {
   

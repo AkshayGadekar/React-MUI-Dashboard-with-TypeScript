@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import apiEndPoints from "../../apiEndPoints";
 import {useNavigate} from "react-router-dom";
 import withAxios from '../../HOC/withAxios';
-import type {FetchUserProps} from '../../types/utilityComponents';
+import type {FetchUserProps} from '../../types/components';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { loggedIn, gotUser } from '../../store/slices/userSlice';
 import DesktopLoader from './DesktopLoader';
@@ -16,7 +16,7 @@ const FetchUser = (props: FetchUserProps) => {
         props.authAxios({...apiEndPoints.auth.getUserDetails})
         .then(res => {
             const successResponse = res.data;
-            console.log('successResponse', successResponse);
+            
             dispatch(loggedIn(true));
             dispatch(gotUser(successResponse));
         })

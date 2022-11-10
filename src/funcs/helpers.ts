@@ -1,4 +1,4 @@
-import {type SnackbarInfo} from "../types/utilityComponents";
+import {type SnackbarInfo} from "../types/components";
 
 export const filterValidationErrors = (validationErrorsObj: Record<string,any>, fields: string[]): [Record<string,any>, Record<string,any>] => {
     let fieldValidationErrors:Record<string,any> = {};

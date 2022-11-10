@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import type {BreadcrumbProps} from '../../types/utilityComponents';
+import type {BreadcrumbProps} from '../../types/components';
 import { Typography } from '@mui/material';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';

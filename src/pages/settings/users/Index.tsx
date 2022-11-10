@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from 'react';
+import withAxios from '../../../HOC/withAxios';
 import Box from '@mui/material/Box';
-import Heading from '../../components/utilities/Heading';
-import IndexListing from "./components/IndexListing";
-import Breadcrumb from "../../components/utilities/Breadcrumb";
-import {log} from "../../funcs/helpers";
-import TableSkeleton from '../../components/skeletons/TableSkeleton';
-import withAxios from '../../HOC/withAxios';
-import type {NodesIndexProps} from "../../types/pages";
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {getQueryString, encodedQueryString} from "../../funcs/helpers";
+import type {UsersIndexProps} from "../../../types/pages";
+import { useAppSelector } from '../../../store/hooks';
+import { log } from '../../../funcs/helpers';
+import TableSkeleton from '../../../components/skeletons/TableSkeleton';
+import Breadcrumb from '../../../components/utilities/Breadcrumb';
+import Heading from '../../../components/utilities/Heading';
+import IndexListing from './components/IndexListing';
 
-const Index = (props: NodesIndexProps) => {
+const Index = (props: UsersIndexProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -18,8 +17,12 @@ const Index = (props: NodesIndexProps) => {
 
   const path = [
     {
-      label: 'Nodes',
-      link: '/nodes/list'
+      label: 'Settings',
+      link: '/settings/users/list'
+    },
+    {
+      label: 'Users',
+      link: '/settings/users/list'
     },
     {
       label: 'List'
@@ -28,14 +31,9 @@ const Index = (props: NodesIndexProps) => {
 
   useEffect(() => {
 
-    const data = {
-      limit: 20,
-      page: 1,
-      customer: userInfo.user.account.uuid
-    };
     const requestController = new AbortController();
     
-    props.authAxios({...props.apiEndPoints.nodes.list, params: data, signal: requestController.signal
+    props.authAxios({...props._(props.apiEndPoints.users.list, {id: userInfo.user.account.uuid}), signal: requestController.signal
     }).then((res) => {
 
         props.setShowSnackBar(false);
@@ -43,7 +41,7 @@ const Index = (props: NodesIndexProps) => {
         const successResponse = res.data;
         log(successResponse);
         
-        setData(successResponse);
+        setData(successResponse.users);
         setIsLoading(false);
         
     }).catch((error) => {
@@ -66,7 +64,7 @@ const Index = (props: NodesIndexProps) => {
         :
         <>
           <Breadcrumb path={path} />
-          <Heading title="Nodes" />
+          <Heading title="Users" />
           <IndexListing data={data} />
         </>
       }
@@ -74,4 +72,4 @@ const Index = (props: NodesIndexProps) => {
   )
 }
 
-export default withAxios<NodesIndexProps>(Index);
+export default withAxios<UsersIndexProps>(Index);

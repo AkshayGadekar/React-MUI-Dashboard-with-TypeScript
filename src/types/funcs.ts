@@ -1,4 +1,4 @@
-import type {SnackbarInfo} from "./utilityComponents";
+import type {SnackbarInfo} from "./components";
 import type {FormikProps}  from 'formik';
 import type {AxiosError, AxiosInstance} from "axios";
 
@@ -36,6 +36,9 @@ export interface ApiEndPoints {
         'update': Record<string, any>
         'restartNodeService': Record<string, any>
         'updateNodeService': Record<string, any>
+    },
+    users: {
+        'list': Record<string, any>
     },
     class: {
         'get': Record<string, any>

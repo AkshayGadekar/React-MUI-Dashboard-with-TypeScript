@@ -93,6 +93,7 @@ const Edit = (props: NodesEditProps) => {
           <Grid item xs={12} md={6} sx={{[theme.breakpoints.up('md')]: {paddingLeft: '1rem'}}}>
             <Grid container direction="column">
               <Grid item sx={{marginBottom: '1.5rem'}}>
+                <Heading title="Services" />
                 <EditServices data={data!.services} />
               </Grid>
             </Grid>
@@ -104,4 +105,4 @@ const Edit = (props: NodesEditProps) => {
   )
 }
 
-export default withAxios(Edit);
+export default withAxios<NodesEditProps>(Edit);

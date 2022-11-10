@@ -47,6 +47,13 @@ const apiEndPoints: ApiEndPoints = {
             url: '/nodes/{id}/service/{name}/update',
         }
     },
+    users: {
+        'list': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'get',
+            url: '/accounts/{id}',
+        }
+    },
     class : {
         'get': {
             baseURL: process.env.REACT_APP_BASE_URL,
