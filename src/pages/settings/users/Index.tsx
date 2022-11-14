@@ -8,10 +8,12 @@ import TableSkeleton from '../../../components/skeletons/TableSkeleton';
 import Breadcrumb from '../../../components/utilities/Breadcrumb';
 import Heading from '../../../components/utilities/Heading';
 import IndexListing from './components/IndexListing';
+import AddNew from './components/AddNew';
 
 const Index = (props: UsersIndexProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const userInfo = useAppSelector(state => state.user);
 
@@ -28,6 +30,20 @@ const Index = (props: UsersIndexProps) => {
       label: 'List'
     }
   ];
+
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const buttonInfo = {
+    value: 'Add New',
+    type: 'button',
+    onClick: handleClickOpenDialog
+  }
 
   useEffect(() => {
 
@@ -53,7 +69,7 @@ const Index = (props: UsersIndexProps) => {
     }
   }, []);
   
-  log('Node rendered');
+  log('Users listing rendered');
 
   return (
     <Box>
@@ -64,7 +80,8 @@ const Index = (props: UsersIndexProps) => {
         :
         <>
           <Breadcrumb path={path} />
-          <Heading title="Users" />
+          <Heading title="Users" button={buttonInfo} />
+          <AddNew open={openDialog} close={handleCloseDialog} />
           <IndexListing data={data} />
         </>
       }

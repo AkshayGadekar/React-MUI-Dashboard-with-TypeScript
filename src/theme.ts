@@ -65,6 +65,15 @@ const theme = createTheme({
           }
         }
       ]
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: "rgba(41, 0, 0, 0.08)"
+          }
+        }
+      }
     }
   }
 });

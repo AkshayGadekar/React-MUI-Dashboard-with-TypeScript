@@ -19,3 +19,8 @@ export interface NodesEditServicesProps extends WithAxiosProps {
 export interface UsersIndexListingProps extends TableProps {
     
 }
+
+export interface UsersAddNewProps extends WithAxiosProps {
+    open: boolean,
+    close: () => void
+}

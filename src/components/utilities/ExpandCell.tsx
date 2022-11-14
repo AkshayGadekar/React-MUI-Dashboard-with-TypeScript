@@ -56,7 +56,7 @@ const GridCellExpand = React.memo(function GridCellExpand(
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [setShowFullCell, showFullCell]);console.log('ExpandCell');
+  }, [setShowFullCell, showFullCell]);
 
   return (
     <Box

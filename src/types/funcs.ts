@@ -38,7 +38,9 @@ export interface ApiEndPoints {
         'updateNodeService': Record<string, any>
     },
     users: {
-        'list': Record<string, any>
+        'list': Record<string, any>,
+        'getRoles': Record<string, any>
+        'addUser': Record<string, any>
     },
     class: {
         'get': Record<string, any>

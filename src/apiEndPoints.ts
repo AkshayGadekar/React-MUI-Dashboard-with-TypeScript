@@ -52,6 +52,17 @@ const apiEndPoints: ApiEndPoints = {
             baseURL: process.env.REACT_APP_BASE_URL_GMV,
             method: 'get',
             url: '/accounts/{id}',
+        },
+        'getRoles': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'get',
+            url: '/permissions/roles',
+        },
+        'addUser': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'post',
+            url: '/users',
+            showProgressBar: true
         }
     },
     class : {
