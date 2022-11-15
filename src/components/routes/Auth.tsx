@@ -5,6 +5,7 @@ import Login from "../../pages/Login";
 import NodesIndex from "../../pages/nodes/Index";
 import NodesEdit from "../../pages/nodes/Edit";
 import UsersIndex from "../../pages/settings/users/Index";
+import Edit from '../../pages/settings/users/Edit';
 
 const Auth = () => {
   
@@ -18,6 +19,7 @@ const Auth = () => {
       <Route path="/settings" >
         <Route path="users" >
           <Route path="list" element={<UsersIndex />} />
+          <Route path="edit/:id" element={<Edit />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />

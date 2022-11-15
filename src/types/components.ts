@@ -77,3 +77,7 @@ export interface BreadcrumbProps {
 export interface FetchUserProps extends WithAxiosProps {
     
 }
+
+export interface CloseModalProps {
+    close: () => void
+}

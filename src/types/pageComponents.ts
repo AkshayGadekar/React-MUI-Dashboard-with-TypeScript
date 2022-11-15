@@ -1,4 +1,5 @@
 import type {WithAxiosProps} from "./funcs";
+import type {SnackbarInfo} from "./components";
 
 export interface TableProps {
     data: any[]
@@ -22,5 +23,10 @@ export interface UsersIndexListingProps extends TableProps {
 
 export interface UsersAddNewProps extends WithAxiosProps {
     open: boolean,
-    close: () => void
+    close: () => void,
+    setParentState: {
+        setSnackbarInfo: (x: SnackbarInfo) => void;
+        setShowSnackBar: (x: boolean) => void;
+        setToggleListing: React.Dispatch<React.SetStateAction<boolean>>
+    }
 }

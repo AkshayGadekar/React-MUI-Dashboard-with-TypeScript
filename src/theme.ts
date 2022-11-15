@@ -31,7 +31,7 @@ const theme = createTheme({
               top: 0,
               left: 0,
               width: '100%',
-              height: '3px'
+              height: '4px'
             }
           },
         },
@@ -46,13 +46,13 @@ const theme = createTheme({
             position: "fixed",
             width: "100%",
             zIndex: 2000,
-            height: '3px'
+            height: '4px'
           }
         }
       ],
       styleOverrides: {
         root: {
-          height: '3px'
+          height: '4px'
         }
       }
     },

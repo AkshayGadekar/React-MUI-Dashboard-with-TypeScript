@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {Navigate} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Guest from './components/routes/Guest';
 import Header from "./components/structure/Header";

@@ -41,6 +41,7 @@ export interface ApiEndPoints {
         'list': Record<string, any>,
         'getRoles': Record<string, any>
         'addUser': Record<string, any>
+        'getUser': Record<string, any>
     },
     class: {
         'get': Record<string, any>

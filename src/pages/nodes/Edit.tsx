@@ -16,7 +16,7 @@ import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import { useParams } from 'react-router-dom';
 import EditInfo from './components/EditInfo';
 import EditServices from './components/EditServices';
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 const Edit = (props: NodesEditProps) => {
   const [isLoading, setIsLoading] = useState(true);

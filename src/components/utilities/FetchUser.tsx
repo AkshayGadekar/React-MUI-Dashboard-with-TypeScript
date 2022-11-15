@@ -8,7 +8,7 @@ import { loggedIn, gotUser } from '../../store/slices/userSlice';
 import DesktopLoader from './DesktopLoader';
 
 const FetchUser = (props: FetchUserProps) => {
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const dispatch = useAppDispatch();
 
     useEffect(() => {

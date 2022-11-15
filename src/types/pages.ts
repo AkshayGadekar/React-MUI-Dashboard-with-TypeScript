@@ -19,3 +19,7 @@ export interface NodesEditProps extends WithAxiosProps {
 export interface UsersIndexProps extends WithAxiosProps {
     
 }
+
+export interface UsersEditProps extends WithAxiosProps {
+    
+}

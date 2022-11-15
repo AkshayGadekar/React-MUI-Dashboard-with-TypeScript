@@ -14,7 +14,7 @@ const EditInfo = (props: NodesEditInfoProps) => {
     
     const [name, setName] = useState(data!.name);
     const [nameError, setNameError] = useState('');
-    const [loading, setLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const param = useParams();
 
@@ -43,7 +43,7 @@ const EditInfo = (props: NodesEditInfoProps) => {
             ev.preventDefault();
 
             if (!nameError) {
-                setLoading(true);
+                setIsLoading(true);
                 
                 const data = {name};
                 props.authAxios({...props._(props.apiEndPoints.nodes.update, {id: param.id}), data})
@@ -60,7 +60,7 @@ const EditInfo = (props: NodesEditInfoProps) => {
                     props.processAxiosError(error, props);
                 })
                 .finally(() => {
-                    setLoading(false);
+                    setIsLoading(false);
                 });
             }
         }
@@ -69,7 +69,7 @@ const EditInfo = (props: NodesEditInfoProps) => {
   
     return (
         <>
-            <Heading title="Information" button={{...buttonInfo, disabled: loading}} />
+            <Heading title="Information" button={{...buttonInfo, disabled: isLoading}} />
             <Box sx={{width: '100%', p:2, 
             backgroundColor: '#fff', boxShadow: theme => theme.shadows[1]}}>
                 <form id="nodesViewForm">

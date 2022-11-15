@@ -11,53 +11,56 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import type {UsersAddNewProps} from '../../../../types/pageComponents';
 import withAxios from '../../../../HOC/withAxios';
+import {useNavigate} from 'react-router-dom';
 import Heading from '../../../../components/utilities/Heading';
-import { Divider } from '@mui/material';
+import Divider from '@mui/material/Divider';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import CircularProgress from '@mui/material/CircularProgress';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { log } from '../../../../funcs/helpers';
-import * as Yup from 'yup';
 import {useFormik}  from 'formik';
+import * as Yup from 'yup';
 import FormHelperText from '@mui/material/FormHelperText';
 import { useAppSelector } from '../../../../store/hooks';
+import CloseModal from "../../../../components/utilities/CloseModal";
 
-const AddNew = (props: UsersAddNewProps) => {
+const Add = (props: UsersAddNewProps) => {
     const [open, setOpen] = useState(false);
     
     const [isLoading, setIsLoading] = useState(false);
     const [roles, setRoles] = useState<Record<string, any>[]>([]);
 
     const userInfo = useAppSelector(state => state.user);
+    
+    const navigate = useNavigate();
 
     interface InitialValues {
-        first_name: string, last_name: string, email: string, role_id: string ,
+        first_name: string, last_name: string, email: string, role_id: number ,
         account_uuid: string, prevent_email: boolean, system_refer: string
     }
     
     const formik = useFormik<InitialValues>({
-        initialValues: {first_name: "", last_name: "", email: "", role_id: "",
+        initialValues: {first_name: "", last_name: "", email: "", role_id: 0,
         account_uuid: userInfo.user.account.uuid, prevent_email: false, system_refer: userInfo.user.system_refer}, 
         validateOnBlur: false, 
         onSubmit: (values, formikBag) => {
-            log(values);
-            // props.authAxios({...props.apiEndPoints.users.addUser, data: values}).then((res) => {
+            
+            props.authAxios({...props.apiEndPoints.users.addUser, data: values}).then((res) => {
                 
-            //     const successResponse = res.data;
-            //     log('successResponse', successResponse);
+                const successResponse = res.data;
+                log('successResponse', successResponse);
+
+                props.setParentState.setSnackbarInfo({message: 'User created successfully', severity: 'success'});
+                props.setParentState.setShowSnackBar(true);
+                props.setParentState.setToggleListing(value => !value);
                 
-            //     props.setSnackbarInfo({message: successResponse, severity: 'success'});
-            //     props.setShowSnackBar(true);
-            //     //formik.resetForm();
-                
-            // }).catch((error) => {
-            //     log(error.message);
-            //     props.processAxiosError<InitialValues>(error, props, formik);
-            // }).finally(() => {
-            //     formikBag.setSubmitting(false);
-            // });
+            }).catch((error) => {
+                props.processAxiosError<InitialValues>(error, props, formik);
+            }).finally(() => {
+                formikBag.setSubmitting(false);
+            });
 
         },
         validationSchema: Yup.object({
@@ -101,6 +104,7 @@ const AddNew = (props: UsersAddNewProps) => {
     return (
         <Box>
             <Dialog open={props.open} onClose={props.close} fullWidth maxWidth='lg'>
+                <CloseModal close={props.close} />
                 <Typography variant="h6" p={3}  >Create User</Typography>
                 <Divider />
                 <DialogContent>
@@ -168,14 +172,16 @@ const AddNew = (props: UsersAddNewProps) => {
                         </Grid>
                     </form>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={props.close}>Cancel</Button>
-                    <Button type="submit" form="CreateUserForm" 
-                    disabled={!(formik.dirty && formik.isValid) || formik.isSubmitting}>Create</Button>
+                <Divider />
+                <DialogActions sx={{pr: 3}}>
+                    <Button type="submit" form="CreateUserForm" variant="contained" sx={{color: '#fff'}}
+                    disabled={!(formik.dirty && formik.isValid) || formik.isSubmitting}>
+                        {!formik.isSubmitting ? "Create" : <CircularProgress color="inherit" size={26} />}
+                    </Button>
                 </DialogActions>
             </Dialog>
         </Box>
     );
 }
 
-export default withAxios(AddNew);
+export default withAxios(Add);

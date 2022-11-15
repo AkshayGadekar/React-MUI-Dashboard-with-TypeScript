@@ -63,7 +63,12 @@ const apiEndPoints: ApiEndPoints = {
             method: 'post',
             url: '/users',
             showProgressBar: true
-        }
+        },
+        'getUser': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'get',
+            url: '/users/{id}'
+        },
     },
     class : {
         'get': {
