@@ -16,21 +16,14 @@ import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import { useParams } from 'react-router-dom';
 import EditInfo from './components/EditInfo';
 import EditServices from './components/EditServices';
+import menu from "../../objects/menu";
 import Typography from '@mui/material/Typography';
 
 const Edit = (props: NodesEditProps) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<Record<string, any>>();
+  const [data, setData] = useState<Record<string, any>>({});
 
-  const path = [
-    {
-      label: 'Nodes',
-      link: '/nodes/list'
-    },
-    {
-      label: 'View'
-    }
-  ];
+  const breadCrumb = menu[4].otherHrefs!.edit.breadCrumb;
 
   const param = useParams();
   const theme = useTheme();
@@ -67,7 +60,7 @@ const Edit = (props: NodesEditProps) => {
       <EditSkeleton />
       :
       <>
-        <Breadcrumb path={path} />
+        <Breadcrumb path={breadCrumb} />
         <Grid container>
           <Grid item xs={12} md={6} sx={{[theme.breakpoints.up('md')]: {paddingRight: '1rem'}}}>
             <Grid container direction="column">

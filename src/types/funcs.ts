@@ -2,10 +2,16 @@ import type {SnackbarInfo} from "./components";
 import type {FormikProps}  from 'formik';
 import type {AxiosError, AxiosInstance} from "axios";
 
-interface errorResponse {
+export interface successResponse {
+    success:true, 
+    message:string, 
+    data: null|Record<string, any>|Record<string, any>[]
+}
+
+export interface errorResponse {
     success:false, 
     message:string, 
-    data: null|Record<string, any>
+    data: null|Record<string, any>|Record<string, any>[]
 }
 
 type Arguement1 = AxiosError<errorResponse>;
@@ -42,6 +48,16 @@ export interface ApiEndPoints {
         'getRoles': Record<string, any>
         'addUser': Record<string, any>
         'getUser': Record<string, any>
+        'editUser': Record<string, any>
+        'editPassword': Record<string, any>
+    },
+    roles: {
+        'getPermissions': Record<string, any>
+        'list': Record<string, any>
+        'create': Record<string, any>
+        'edit': Record<string, any>
+        'update': Record<string, any>
+        'createPermission': Record<string, any>
     },
     class: {
         'get': Record<string, any>

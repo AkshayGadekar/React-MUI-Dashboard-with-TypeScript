@@ -7,12 +7,8 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import type {UsersAddNewProps} from '../../../../types/pageComponents';
 import withAxios from '../../../../HOC/withAxios';
-import {useNavigate} from 'react-router-dom';
-import Heading from '../../../../components/utilities/Heading';
 import Divider from '@mui/material/Divider';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -27,22 +23,18 @@ import { useAppSelector } from '../../../../store/hooks';
 import CloseModal from "../../../../components/utilities/CloseModal";
 
 const Add = (props: UsersAddNewProps) => {
-    const [open, setOpen] = useState(false);
-    
     const [isLoading, setIsLoading] = useState(false);
     const [roles, setRoles] = useState<Record<string, any>[]>([]);
 
     const userInfo = useAppSelector(state => state.user);
-    
-    const navigate = useNavigate();
 
     interface InitialValues {
-        first_name: string, last_name: string, email: string, role_id: number ,
+        first_name: string, last_name: string, email: string, role_id: number|"" ,
         account_uuid: string, prevent_email: boolean, system_refer: string
     }
     
     const formik = useFormik<InitialValues>({
-        initialValues: {first_name: "", last_name: "", email: "", role_id: 0,
+        initialValues: {first_name: "", last_name: "", email: "", role_id: "",
         account_uuid: userInfo.user.account.uuid, prevent_email: false, system_refer: userInfo.user.system_refer}, 
         validateOnBlur: false, 
         onSubmit: (values, formikBag) => {
@@ -54,7 +46,7 @@ const Add = (props: UsersAddNewProps) => {
 
                 props.setParentState.setSnackbarInfo({message: 'User created successfully', severity: 'success'});
                 props.setParentState.setShowSnackBar(true);
-                props.setParentState.setToggleListing(value => !value);
+                props.setParentState.setUsersCreatedCount(count => count + 1);
                 
             }).catch((error) => {
                 props.processAxiosError<InitialValues>(error, props, formik);
@@ -67,7 +59,7 @@ const Add = (props: UsersAddNewProps) => {
             first_name: Yup.string().required().min(1).max(50),
             last_name: Yup.string().required().min(1).max(50),
             email: Yup.string().required().email(),
-            role_id: Yup.number().required()
+            role_id: Yup.number().typeError('role_id is a required field').required()
         })
     });
 
@@ -105,7 +97,7 @@ const Add = (props: UsersAddNewProps) => {
         <Box>
             <Dialog open={props.open} onClose={props.close} fullWidth maxWidth='lg'>
                 <CloseModal close={props.close} />
-                <Typography variant="h6" p={3}  >Create User</Typography>
+                <Typography variant="h6" p={3}>Create User</Typography>
                 <Divider />
                 <DialogContent>
                     <form id="CreateUserForm" onSubmit={formik.handleSubmit}>
@@ -184,4 +176,4 @@ const Add = (props: UsersAddNewProps) => {
     );
 }
 
-export default withAxios(Add);
+export default withAxios<UsersAddNewProps>(Add);

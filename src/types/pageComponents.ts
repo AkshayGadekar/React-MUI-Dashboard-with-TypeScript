@@ -27,6 +27,28 @@ export interface UsersAddNewProps extends WithAxiosProps {
     setParentState: {
         setSnackbarInfo: (x: SnackbarInfo) => void;
         setShowSnackBar: (x: boolean) => void;
-        setToggleListing: React.Dispatch<React.SetStateAction<boolean>>
+        setUsersCreatedCount: React.Dispatch<React.SetStateAction<number>>
+    }
+}
+
+export interface EditPasswordProps extends WithAxiosProps {
+    open: boolean,
+    close: () => void,
+}
+
+export interface ShowPermissionsProps {
+    permissions: Record<string, any>[],
+    selectedPermissionsIds: number[],
+    togglePermissionCheck?: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+    disabledChecks?: boolean
+}
+
+export interface AddPermissionProps extends WithAxiosProps {
+    open: boolean,
+    close: () => void,
+    setParentState: {
+        setSnackbarInfo: (x: SnackbarInfo) => void;
+        setShowSnackBar: (x: boolean) => void;
+        setPermissionsCreatedCount: React.Dispatch<React.SetStateAction<number>>
     }
 }

@@ -12,10 +12,10 @@ import type {UsersIndexListingProps} from '../../../../types/pageComponents';
 import menu from '../../../../objects/menu';
 import {replaceDynamicParamInHref} from '../../../../funcs/helpers';
 
-const editActionHref = menu[7].children![0].otherHrefs!.edit.href;
+const editActionHref = menu[7].children![1].otherHrefs!.edit.href;
 
 const IndexListing = ({data}: UsersIndexListingProps) => {
-  log('Users table rendered', data);
+  log('Roles table rendered', data);
   const [page, setPage] = React.useState(0);
 
   const handlePageChange = (newPage: number): void => {
@@ -28,11 +28,8 @@ const IndexListing = ({data}: UsersIndexListingProps) => {
 
   const columns = useMemo(() => {
     const columns: GridColDef[] = [
-      { field: 'first_name', headerName: 'First Name', sortable: false, minWidth: 150 },
-      { field: 'last_name', headerName: 'Last Name', sortable: false, minWidth: 150 },
-      { field: 'email', headerName: 'Email', sortable: false, minWidth: 250 },
-      { field: 'role_name', headerName: 'Role', sortable: false, minWidth: 250, 
-      valueGetter: params => params.row.role.role_name },
+      { field: 'role_name', headerName: 'Name', sortable: false, minWidth: 400 },
+      { field: 'slug', headerName: 'Slug', sortable: false, minWidth: 400 },
       { field: 'actions', headerName: 'Actions', sortable: false, minWidth: 100, flex: 1,
       renderCell: params =>  <Button size="small" color="primary" sx={{color: "#fff"}} component={Link} to={replaceDynamicParamInHref(editActionHref, [params.row.uuid])} variant="contained">Edit</Button> }
     ];

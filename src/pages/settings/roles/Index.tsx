@@ -1,41 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import withAxios from '../../../HOC/withAxios';
 import Box from '@mui/material/Box';
-import type {UsersIndexProps} from "../../../types/pages";
+import {Link} from "react-router-dom";
+import withAxios from '../../../HOC/withAxios';
+import type {RolesIndexProps} from "../../../types/pages";
 import { useAppSelector } from '../../../store/hooks';
 import { log } from '../../../funcs/helpers';
 import TableSkeleton from '../../../components/skeletons/TableSkeleton';
 import Breadcrumb from '../../../components/utilities/Breadcrumb';
 import Heading from '../../../components/utilities/Heading';
 import IndexListing from './components/IndexListing';
-import Add from './components/Add';
-import menu from "../../../objects/menu";
+import menu from '../../../objects/menu';
 
-const Index = (props: UsersIndexProps) => {
+const createActionHref = menu[7].children![1].otherHrefs!.create.href;
+
+const Index = (props: RolesIndexProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [usersCreatedCount, setUsersCreatedCount] = useState<number>(0);
 
-  const userInfo = useAppSelector(state => state.user);
-
-  const breadCrumb = menu[7].children![0].breadCrumb;
-
-  const handleClickOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
+  const breadCrumb = menu[7].children![1].breadCrumb;
 
   const buttonInfo = {
     value: 'Add New',
-    type: 'button',
-    onClick: () => setOpenDialog(true)
+    component: Link,
+    to: createActionHref 
   }
-
-  const setParentState = { setSnackbarInfo: props.setSnackbarInfo, setShowSnackBar: props.setShowSnackBar, setUsersCreatedCount };
 
   useEffect(() => {
 
@@ -43,7 +31,7 @@ const Index = (props: UsersIndexProps) => {
     
     setIsLoading(true);
     
-    props.authAxios({...props._(props.apiEndPoints.users.list, {id: userInfo.user.account.uuid}), signal: requestController.signal
+    props.authAxios({...props.apiEndPoints.roles.list, signal: requestController.signal
     }).then((res) => {
 
         props.setShowSnackBar(false);
@@ -51,10 +39,8 @@ const Index = (props: UsersIndexProps) => {
         const successResponse = res.data;
         log(successResponse);
         
-        setData(successResponse.users);
+        setData(successResponse.records);
         setIsLoading(false);
-
-        setOpenDialog(false);
         
     }).catch((error) => {
         props.processAxiosError(error, props);
@@ -63,9 +49,9 @@ const Index = (props: UsersIndexProps) => {
     return () => {
       requestController.abort('Request aborted to clean up useEffect.');
     }
-  }, [usersCreatedCount]);
+  }, []);
   
-  log('Users listing rendered');
+  log('Roles listing rendered');
 
   return (
     <Box>
@@ -76,8 +62,7 @@ const Index = (props: UsersIndexProps) => {
         :
         <>
           <Breadcrumb path={breadCrumb} />
-          <Heading title="Users" button={buttonInfo} />
-          <Add open={openDialog} close={() => setOpenDialog(false)} setParentState={setParentState} />
+          <Heading title="Roles" button={buttonInfo} />
           <IndexListing data={data} />
         </>
       }
@@ -85,4 +70,4 @@ const Index = (props: UsersIndexProps) => {
   )
 }
 
-export default withAxios<UsersIndexProps>(Index);
+export default withAxios<RolesIndexProps>(Index);

@@ -45,10 +45,16 @@ export interface Menu {
     label: string,
     icon: React.ComponentType<MenuItemIconProps>,
     href?: string,
-    otherHrefs?: Record<string, any>
+    breadCrumb?: Breadcrumb,
+    otherHrefs?: {
+        [key: string]: {href: string, breadCrumb: Breadcrumb}
+    }
+}
+export interface SubMenu extends Menu {
+    breadCrumb: Breadcrumb
 }
 export interface MainMenu extends Menu {
-    children?: Menu[]
+    children?: SubMenu[]
 }
 
 export interface MenuItemIconProps {
@@ -67,11 +73,13 @@ export interface HeadingProps {
     button?: Record<string, any>
 }
 
+type Breadcrumb = {
+    label: string,
+    link?: string
+}[]
+
 export interface BreadcrumbProps {
-    path: {
-        label: string,
-        link?: string
-    }[]
+    path: Breadcrumb
 }
 
 export interface FetchUserProps extends WithAxiosProps {
@@ -80,4 +88,8 @@ export interface FetchUserProps extends WithAxiosProps {
 
 export interface CloseModalProps {
     close: () => void
+}
+
+export interface TableSkeletonProps {
+    notShowTextSkeleton?: true
 }

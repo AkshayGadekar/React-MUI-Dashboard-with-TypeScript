@@ -7,8 +7,8 @@ import {log} from "../../funcs/helpers";
 import TableSkeleton from '../../components/skeletons/TableSkeleton';
 import withAxios from '../../HOC/withAxios';
 import type {NodesIndexProps} from "../../types/pages";
+import menu from "../../objects/menu";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {getQueryString, encodedQueryString} from "../../funcs/helpers";
 
 const Index = (props: NodesIndexProps) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,15 +16,7 @@ const Index = (props: NodesIndexProps) => {
 
   const userInfo = useAppSelector(state => state.user);
 
-  const path = [
-    {
-      label: 'Nodes',
-      link: '/nodes/list'
-    },
-    {
-      label: 'List'
-    }
-  ];
+  const breadCrumb = menu[4].breadCrumb!;
 
   useEffect(() => {
 
@@ -65,7 +57,7 @@ const Index = (props: NodesIndexProps) => {
         <TableSkeleton />
         :
         <>
-          <Breadcrumb path={path} />
+          <Breadcrumb path={breadCrumb} />
           <Heading title="Nodes" />
           <IndexListing data={data} />
         </>

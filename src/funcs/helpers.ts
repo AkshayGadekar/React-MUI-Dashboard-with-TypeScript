@@ -1,3 +1,4 @@
+import { FunctionBody } from "typescript";
 import {type SnackbarInfo} from "../types/components";
 
 export const filterValidationErrors = (validationErrorsObj: Record<string,any>, fields: string[]): [Record<string,any>, Record<string,any>] => {
@@ -125,4 +126,10 @@ export const replaceDynamicParamInHref = (dynamicLink: string, dynamicParams: st
 
 export const convertToTimezone = (date: string|Date, tzString: string) => {
     return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
+}
+
+export const callAfterTimeout = (func: (...args: any[]) => any, time: number) => {
+    setTimeout(() => {
+        func();
+    }, time * 1000);
 }

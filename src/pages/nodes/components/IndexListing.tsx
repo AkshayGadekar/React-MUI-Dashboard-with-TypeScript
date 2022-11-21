@@ -9,10 +9,10 @@ import CheckIcon from '@mui/icons-material/Check';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import type {NodesIndexListingProps} from '../../../types/pageComponents';
-import menus from '../../../objects/menus';
+import menu from '../../../objects/menu';
 import {replaceDynamicParamInHref} from '../../../funcs/helpers';
 
-const editActionHref = menus[4].otherHrefs!.edit;
+const editActionHref = menu[4].otherHrefs!.edit.href;
 
 const IndexListing = ({data}: NodesIndexListingProps) => {
   log('Node table rendered');

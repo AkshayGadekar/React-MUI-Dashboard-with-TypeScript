@@ -8,7 +8,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MuiDrawer from '@mui/material/Drawer';
-import menus from "../../objects/menus";
+import menus from "../../objects/menu";
 import MenuItem from '../utilities/MenuItem';
 import {drawerWidth} from "../../objects/objects";
 import type {DrawerProps} from "../../types/components";
@@ -59,7 +59,7 @@ const Drawer = ({container, mobileOpen, handleDrawerToggle, hideDrawer}: DrawerP
               </AccordionSummary>
               <AccordionDetails>
                 {
-                  subMenus.map((submenu, subindex) => <MenuItem key={subindex} href={submenu.href} otherHrefs={menu.otherHrefs} label={submenu.label} icon={submenu.icon} />)
+                  subMenus.map((submenu, subindex) => <MenuItem key={subindex} href={submenu.href} otherHrefs={submenu.otherHrefs} label={submenu.label} icon={submenu.icon} />)
                 }
               </AccordionDetails>
             </Accordion>

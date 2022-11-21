@@ -25,7 +25,7 @@ const MenuItem = (props: MenuItemProps<MenuItemIconProps>) => {
     if (!isActive) {
       const hrefs = props.otherHrefs;
       for(const key in hrefs){
-        const dynamicLink = hrefs[key];
+        const dynamicLink = hrefs[key].href;
         const actualLink = pathname;
         isActive = isLinkSame(dynamicLink, actualLink);
         if (isActive) {

@@ -23,3 +23,15 @@ export interface UsersIndexProps extends WithAxiosProps {
 export interface UsersEditProps extends WithAxiosProps {
     
 }
+
+export interface RolesIndexProps extends WithAxiosProps {
+    
+}
+
+export interface RolesCreateProps extends WithAxiosProps {
+    
+}
+
+export interface RolesEditProps extends WithAxiosProps {
+    
+}

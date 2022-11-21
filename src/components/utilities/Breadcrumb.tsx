@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import Box from '@mui/material/Box';
 import type {BreadcrumbProps} from '../../types/components';
 import Typography from '@mui/material/Typography';
@@ -6,21 +6,13 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import {Link as RouterLink} from 'react-router-dom';
 
-const defaultPath = [
-    {
-        label: 'Home',
-        link: '/'
-    }
-];
-
 const Breadcrumb = (props: BreadcrumbProps) => {
 
-  const totalPath = [...defaultPath, ...props.path];
+  const totalPath = props.path;
 
   function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.preventDefault();
-    console.info('You clicked a breadcrumb.');
-  }  
+  }  console.log('breadcrumb rendered');
 
   return (
     <Box role="presentation" onClick={handleClick} mb={1}>
@@ -42,4 +34,9 @@ const Breadcrumb = (props: BreadcrumbProps) => {
   )
 }
 
-export default Breadcrumb
+const areEqual = (prevProps: BreadcrumbProps, nextProps: BreadcrumbProps) => {
+    const length = prevProps.path.length;
+    return prevProps.path[length-1].label === nextProps.path[length-1].label;
+}
+
+export default memo(Breadcrumb, areEqual);

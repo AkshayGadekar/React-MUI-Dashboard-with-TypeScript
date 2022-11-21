@@ -17,7 +17,7 @@ const DesktopLoader = () => {
       <Backdrop
         sx={{ color: (theme) => theme.palette.primary.main, zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
-        onClick={handleClose}
+        //onClick={handleClose}
       >
         <CircularProgress color="inherit" />
       </Backdrop>

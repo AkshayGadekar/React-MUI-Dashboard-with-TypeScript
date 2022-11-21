@@ -69,6 +69,53 @@ const apiEndPoints: ApiEndPoints = {
             method: 'get',
             url: '/users/{id}'
         },
+        'editUser': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'put',
+            url: '/users/{id}',
+            showProgressBar: true
+        },
+        'editPassword': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'post',
+            url: '/user/password',
+            showProgressBar: true
+        },
+    },
+    roles: {
+        'getPermissions': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'get',
+            url: '/permissions'
+        },
+        'list': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'get',
+            url: '/permissions/roles'
+        },
+        'create': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'post',
+            url: '/permissions/roles',
+            showProgressBar: true
+        },
+        'edit': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'get',
+            url: '/permissions/roles/{id}'
+        },
+        'update': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'PUT',
+            url: '/permissions/roles/{id}',
+            showProgressBar: true
+        },
+        'createPermission': {
+            baseURL: process.env.REACT_APP_BASE_URL_GMV,
+            method: 'post',
+            url: '/permissions',
+            showProgressBar: true
+        }
     },
     class : {
         'get': {
