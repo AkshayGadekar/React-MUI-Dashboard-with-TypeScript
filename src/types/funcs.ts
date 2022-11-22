@@ -37,14 +37,17 @@ export interface ApiEndPoints {
         'getUserDetails': Record<string, any>
     },
     nodes: {
-        'list': Record<string, any>,
+        'list': Record<string, any>
         'edit': Record<string, any>
         'update': Record<string, any>
         'restartNodeService': Record<string, any>
         'updateNodeService': Record<string, any>
     },
+    messages: {
+        'list': Record<string, any>
+    },
     users: {
-        'list': Record<string, any>,
+        'list': Record<string, any>
         'getRoles': Record<string, any>
         'addUser': Record<string, any>
         'getUser': Record<string, any>

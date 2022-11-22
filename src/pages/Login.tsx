@@ -57,7 +57,7 @@ const Login = (props: LoginProps) => {
     },
     validationSchema: Yup.object({
         email: Yup.string().required().email(),
-        password: Yup.string().required().min(8).max(40)
+        password: Yup.string().required().min(6).max(40)
         //.matches(/^(?=.*[1-9\W])(?=.*[a-zA-Z]).+$/, "password must contain letters with at least one number or symbol.")
     })
   });

@@ -117,7 +117,17 @@ const menu:MainMenu[] = [
     {
         label: 'Messaging',
         icon: MessageIcon,
-        href: '/messaging/list'
+        href: '/messaging/list',
+        breadCrumb: [
+            ...prefixBread,
+            {
+                label: 'Messaging',
+                link: '/messaging/list'
+            },
+            {
+                label: 'List'
+            }
+        ]
     },
     {
         label: 'Prompts',

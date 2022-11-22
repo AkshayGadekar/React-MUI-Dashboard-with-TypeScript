@@ -16,6 +16,10 @@ export interface NodesEditProps extends WithAxiosProps {
     
 }
 
+export interface MessagesIndexProps extends WithAxiosProps {
+    
+}
+
 export interface UsersIndexProps extends WithAxiosProps {
     
 }

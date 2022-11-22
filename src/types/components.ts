@@ -93,3 +93,8 @@ export interface CloseModalProps {
 export interface TableSkeletonProps {
     notShowTextSkeleton?: true
 }
+
+export interface AudioPlayerProps {
+    fileName: string,
+    url: string
+}

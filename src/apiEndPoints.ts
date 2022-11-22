@@ -47,6 +47,13 @@ const apiEndPoints: ApiEndPoints = {
             url: '/nodes/{id}/service/{name}/update',
         }
     },
+    messages: {
+        'list': {
+            baseURL: process.env.REACT_APP_BASE_URL_CALLQX,
+            method: 'get',
+            url: '/messages'
+        }
+    },
     users: {
         'list': {
             baseURL: process.env.REACT_APP_BASE_URL_GMV,
