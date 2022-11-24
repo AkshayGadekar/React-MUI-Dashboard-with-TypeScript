@@ -96,5 +96,10 @@ export interface TableSkeletonProps {
 
 export interface AudioPlayerProps {
     fileName: string,
-    url: string
+    url: string,
+    duration: number
+}
+
+export interface DropFileProps extends WithAxiosProps {
+    
 }

@@ -45,6 +45,7 @@ export interface ApiEndPoints {
     },
     messages: {
         'list': Record<string, any>
+        'uploadAudio': Record<string, any>
     },
     users: {
         'list': Record<string, any>
@@ -75,4 +76,9 @@ export interface WithAxiosProps {
     guestAxios: AxiosInstance,
     apiEndPoints: ApiEndPoints,
     _: (apiDetails: Record<string, any>, params: ProcessEndPointParams) => Record<string, any>
+}
+
+export interface ValidationRules {
+    maxSize: [number, string],
+    mimes: [string[], string]
 }

@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import red from '@mui/material/colors/red';
 
 const primary = 'rgb(41 176 66)';const secondary = '#19857b';
 // A custom theme for this app

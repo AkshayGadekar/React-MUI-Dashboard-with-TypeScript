@@ -5,3 +5,5 @@ export const borderLabelToBlackStandard = {InputProps: {sx: {"&::after": {border
 InputLabelProps: {sx: {"&.Mui-focused": {color: "#000"}}}};
 
 export const drawerWidth:number = Number(process.env.REACT_APP_DRAWER_WIDTH);
+
+export const noWrap = {whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'};

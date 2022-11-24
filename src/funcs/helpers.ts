@@ -1,4 +1,4 @@
-import { FunctionBody } from "typescript";
+import type {ValidationRules} from "../types/funcs";
 import {type SnackbarInfo} from "../types/components";
 
 export const filterValidationErrors = (validationErrorsObj: Record<string,any>, fields: string[]): [Record<string,any>, Record<string,any>] => {
@@ -36,6 +36,7 @@ export const log = (...params: any[]): void => {
 
 export const getSizeInBytes = (sizeInMB: number): number => (sizeInMB * 1000 * 1024);
 export const getSizeInKB = (sizeInMB: number): number => (sizeInMB * 1000);
+export const getSizeInMB = (sizeInBytes: number): string => (sizeInBytes/(1000*1024)).toFixed(2);
 
 export const getVarName = (variable: string): string => Object.keys({variable})[0];
 
@@ -132,4 +133,36 @@ export const callAfterTimeout = (func: (...args: any[]) => any, time: number) =>
     setTimeout(() => {
         func();
     }, time * 1000);
+}
+
+export const formatSecondsAsTime = (secs: number) => {
+    const hr  = Math.floor(secs / 3600);
+    let min: number|string = Math.floor((secs - (hr * 3600))/60);
+    let sec: number|string = Math.floor(secs - (hr * 3600) -  (min * 60));
+
+    if (min < 10){ 
+        min = "0" + min; 
+    }
+    if (sec < 10){ 
+        sec  = "0" + sec;
+    }
+
+    return min + ':' + sec;
+}
+
+export const validateFile = (file: File, validationRules: ValidationRules) => {
+
+    if (file == null) {
+        throw new Error('please upload valid file.');
+    }
+    
+    if (validationRules.mimes && !validationRules.mimes[0].includes(file.type)) {
+        throw new Error(validationRules.mimes[1]);
+    }
+
+    if (validationRules.maxSize && file.size > validationRules.maxSize[0]) {
+        throw new Error(validationRules.maxSize[1]);
+    }
+    
+
 }

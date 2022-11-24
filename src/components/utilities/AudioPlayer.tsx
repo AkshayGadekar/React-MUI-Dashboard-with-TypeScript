@@ -4,11 +4,16 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import { log } from "../../funcs/helpers";
+import CircularProgress from "@mui/material/CircularProgress";
 import type {AudioPlayerProps} from '../../types/components';
+import {formatSecondsAsTime} from "../../funcs/helpers";
+import {noWrap} from "../../objects/objects";
 
 const AudioPlayer = (props: AudioPlayerProps) => {
 
     const [audioPlaying, setAudioPlaying] = useState(false);
+    const [audioPlayingHasStarted, setAudioPlayingHasStarted] = useState(false);
+
     const audioRef = useRef<HTMLAudioElement>(null);
     const audioRestartRef = useRef<HTMLDivElement>(null);
     const audioLoaderRef = useRef<HTMLDivElement>(null);
@@ -24,18 +29,19 @@ const AudioPlayer = (props: AudioPlayerProps) => {
     audioPlaying ? audioRef.current?.play() : audioRef.current?.pause();
 
     const updateTime = () => {
+        setAudioPlayingHasStarted(true);
 
-        const currTimeInMs = audioRef.current!.currentTime;
-        const durationInMs = audioRef.current!.duration;
+        const currTimeFloat = audioRef.current!.currentTime;
+        const durationFloat = audioRef.current!.duration;
         
-        const currTime: number = Math.floor(currTimeInMs); 
-        const duration: number = Math.floor(durationInMs);
+        const currTime: number = Math.floor(currTimeFloat); 
+        const duration: number = Math.floor(durationFloat);
 
         const currTimeString = formatSecondsAsTime(currTime);
         const durationString = formatSecondsAsTime(duration)
         
         audioTimeRef.current!.innerHTML = `${currTimeString} / ${durationString}`;
-        audioLoaderRef.current!.style.width = `${(currTimeInMs/durationInMs)*100}%`;
+        audioLoaderRef.current!.style.width = `${(currTimeFloat/durationFloat)*100}%`;
         
         if (!audioRef.current!.ended) {
             audioRestartRef.current!.style.display = "block";
@@ -45,23 +51,12 @@ const AudioPlayer = (props: AudioPlayerProps) => {
         }
 
     }
-    const formatSecondsAsTime = (secs: number) => {
-      const hr  = Math.floor(secs / 3600);
-      let min: number|string = Math.floor((secs - (hr * 3600))/60);
-      let sec: number|string = Math.floor(secs - (hr * 3600) -  (min * 60));
-    
-      if (min < 10){ 
-        min = "0" + min; 
-      }
-      if (sec < 10){ 
-        sec  = "0" + sec;
-      }
-    
-      return min + ':' + sec;
-    }
 
     return (
         <>
+            <audio ref={audioRef} onTimeUpdate={updateTime} style={{display: 'none'}}>
+                <source src={props.url} type="audio/wav" />
+            </audio>
             <Box display="flex" alignItems={"center"} width={'90%'}>
                 <Box bgcolor={'primary.main'} width="25px" 
                     sx={{borderTopLeftRadius: 6, borderBottomLeftRadius: 6, borderRight: '1px solid rgba(0,0,0,.2)', 
@@ -79,15 +74,15 @@ const AudioPlayer = (props: AudioPlayerProps) => {
                 </Box>
                 <Box bgcolor={'grey.300'} alignSelf={"normal"} position="relative"
                     sx={{borderTopRightRadius: 6, borderBottomRightRadius: 6, flexGrow: 1}}>
-                    <Box position="absolute" width="0%" height="100%" bgcolor={'rgba(0,0,0,.1)'} top={0} ref={audioLoaderRef}></Box>
-                    <Box component="span" display="inline-block" width='calc(100% - 120px)' position="relative" zIndex={100} pl={1} sx={{top: '2px', float: "left", 
-                    whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>pacman_death00</Box>
-                    <Box component="span" display="inline-block" width='120px' position="relative" zIndex={100} pl={1} sx={{top: '2px', float: "right"}} ref={audioTimeRef}>00:00 / 00:00</Box>
+                    <Box position="absolute" width="0%" height="100%" bgcolor={'rgba(0,0,0,.1)'} top={0} sx={{transition: 'width .5s', borderTopRightRadius: 6, borderBottomRightRadius: 6}} ref={audioLoaderRef}></Box>
+                    <Box component="span" display="inline-block" width='calc(100% - 123px)' position="relative" zIndex={100} pl={1} sx={{top: '2px', float: "left", 
+                        ...noWrap}}>{props.fileName}</Box>
+                    <Box component="span" display="inline-block" width='23px' position="relative" zIndex={100} pr={1} sx={{top: '5px', float: "right"}} >
+                        <CircularProgress size={15} sx={{float: 'right', visibility: ((audioPlaying && !audioPlayingHasStarted) ? 'visible': 'hidden')}} />
+                    </Box>
+                    <Box component="span" display="inline-block" width='100px' position="relative" zIndex={100} pl={1} sx={{top: '2px', float: "right"}} ref={audioTimeRef}>00:00 / {formatSecondsAsTime(Math.floor(props.duration))}</Box>
                 </Box>
             </Box>
-            <audio id="player-637c68eae8bdc8001ab9547d" ref={audioRef} onTimeUpdate={updateTime} style={{display: 'none'}}>
-            <source src="https://callqx-portal.ecosmob.net/audio/customers/1/messages/wav/637c68eae8bdc8001ab9547d.wav" type="audio/wav" />
-            </audio>
         </>
     )
 }

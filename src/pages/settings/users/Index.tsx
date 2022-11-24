@@ -21,17 +21,8 @@ const Index = (props: UsersIndexProps) => {
 
   const breadCrumb = menu[7].children![0].breadCrumb;
 
-  const handleClickOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
   const buttonInfo = {
     value: 'Add New',
-    type: 'button',
     onClick: () => setOpenDialog(true)
   }
 

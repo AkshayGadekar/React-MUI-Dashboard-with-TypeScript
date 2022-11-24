@@ -52,6 +52,12 @@ const apiEndPoints: ApiEndPoints = {
             baseURL: process.env.REACT_APP_BASE_URL_CALLQX,
             method: 'get',
             url: '/messages'
+        },
+        'uploadAudio': {
+            baseURL: process.env.REACT_APP_BASE_URL_CALLQX,
+            method: 'post',
+            url: '/messages',
+            showProgressBar: true
         }
     },
     users: {

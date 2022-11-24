@@ -8,12 +8,13 @@ import TableSkeleton from '../../components/skeletons/TableSkeleton';
 import withAxios from '../../HOC/withAxios';
 import type {MessagesIndexProps} from "../../types/pages";
 import menu from "../../objects/menu";
+import Add from "./components/Add";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 
 const Index = (props: MessagesIndexProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openDialog, setOpenDialog] = useState(true);
   const [messagesCreatedCount, setMessagesCreatedCount] = useState<number>(0);
 
   const userInfo = useAppSelector(state => state.user);
@@ -22,10 +23,10 @@ const Index = (props: MessagesIndexProps) => {
 
   const messagesButton = {
     value: 'Add New',
-    onClick: () => {
-      log('btn clicked');
-    }
+    onClick: () => setOpenDialog(true)
   }
+
+  const setParentState = { setSnackbarInfo: props.setSnackbarInfo, setShowSnackBar: props.setShowSnackBar, setMessagesCreatedCount };
 
   useEffect(() => {
 
@@ -63,7 +64,8 @@ const Index = (props: MessagesIndexProps) => {
         <>
           <Breadcrumb path={breadCrumb} />
           <Heading title="Messages" button={messagesButton} />
-          <IndexListing data={data} />
+          <Add open={openDialog} close={() => setOpenDialog(false)} setParentState={setParentState} />
+          {/* <IndexListing data={data} /> */}
         </>
       }
     </Box>

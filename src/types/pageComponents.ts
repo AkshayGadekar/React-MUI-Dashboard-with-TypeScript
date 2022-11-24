@@ -52,3 +52,13 @@ export interface AddPermissionProps extends WithAxiosProps {
         setPermissionsCreatedCount: React.Dispatch<React.SetStateAction<number>>
     }
 }
+
+export interface MessagingAddNewProps extends WithAxiosProps {
+    open: boolean,
+    close: () => void,
+    setParentState: {
+        setSnackbarInfo: (x: SnackbarInfo) => void;
+        setShowSnackBar: (x: boolean) => void;
+        setMessagesCreatedCount: React.Dispatch<React.SetStateAction<number>>
+    }
+}
