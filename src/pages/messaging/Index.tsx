@@ -14,7 +14,7 @@ import {useAppDispatch, useAppSelector} from "../../store/hooks";
 const Index = (props: MessagesIndexProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [openDialog, setOpenDialog] = useState(true);
+  const [openDialog, setOpenDialog] = useState(false);
   const [messagesCreatedCount, setMessagesCreatedCount] = useState<number>(0);
 
   const userInfo = useAppSelector(state => state.user);
@@ -65,7 +65,7 @@ const Index = (props: MessagesIndexProps) => {
           <Breadcrumb path={breadCrumb} />
           <Heading title="Messages" button={messagesButton} />
           <Add open={openDialog} close={() => setOpenDialog(false)} setParentState={setParentState} />
-          {/* <IndexListing data={data} /> */}
+          <IndexListing data={data} />
         </>
       }
     </Box>
