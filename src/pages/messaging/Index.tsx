@@ -17,8 +17,6 @@ const Index = (props: MessagesIndexProps) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [messagesCreatedCount, setMessagesCreatedCount] = useState<number>(0);
 
-  const userInfo = useAppSelector(state => state.user);
-
   const breadCrumb = menu[5].breadCrumb!;
 
   const messagesButton = {
@@ -32,7 +30,9 @@ const Index = (props: MessagesIndexProps) => {
 
     const requestController = new AbortController();
     
-    props.authAxios({...props.apiEndPoints.messages.list, params: data, signal: requestController.signal
+    setIsLoading(true);
+
+    props.authAxios({...props.apiEndPoints.messages.list, signal: requestController.signal
     }).then((res) => {
 
         props.setShowSnackBar(false);
@@ -42,6 +42,8 @@ const Index = (props: MessagesIndexProps) => {
         
         setData(successResponse);
         setIsLoading(false);
+
+        setOpenDialog(false);
         
     }).catch((error) => {
         props.processAxiosError(error, props);
@@ -50,7 +52,7 @@ const Index = (props: MessagesIndexProps) => {
     return () => {
       requestController.abort('Request aborted to clean up useEffect.');
     }
-  }, []);
+  }, [messagesCreatedCount]);
   
   log('Messaging rendered');
 

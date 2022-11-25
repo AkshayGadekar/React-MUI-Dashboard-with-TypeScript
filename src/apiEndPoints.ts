@@ -58,6 +58,12 @@ const apiEndPoints: ApiEndPoints = {
             method: 'post',
             url: '/messages',
             showProgressBar: true
+        },
+        'createMessage': {
+            baseURL: process.env.REACT_APP_BASE_URL_CALLQX,
+            method: 'put',
+            url: '/messages/{id}',
+            showProgressBar: true
         }
     },
     users: {

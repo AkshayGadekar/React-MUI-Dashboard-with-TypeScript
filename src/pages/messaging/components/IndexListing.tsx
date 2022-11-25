@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useState, useMemo} from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams, gridPageCountSelector, gridPageSelector, useGridApiContext, useGridSelector } from '@mui/x-data-grid';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -7,12 +7,15 @@ import PauseIcon from '@mui/icons-material/Pause';
 import {log} from "../../../funcs/helpers";
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-import type {NodesIndexListingProps} from '../../../types/pageComponents';
+import type {MessagingIndexListingProps} from '../../../types/pageComponents';
 import AudioPlayer from "../../../components/utilities/AudioPlayer";
+import Add from './Add';
 
-const IndexListing = ({data}: NodesIndexListingProps) => {
+const IndexListing = ({data}: MessagingIndexListingProps) => {
   log('Messaging rendered');
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = useState(0);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogInfo, setDialogInfo] = useState({});
 
   const handlePageChange = (newPage: number): void => {
     setPage(newPage);

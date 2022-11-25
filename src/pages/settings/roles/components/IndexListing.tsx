@@ -8,13 +8,13 @@ import {Link} from "react-router-dom";
 import CheckIcon from '@mui/icons-material/Check';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-import type {UsersIndexListingProps} from '../../../../types/pageComponents';
+import type {RolesIndexListingProps} from '../../../../types/pageComponents';
 import menu from '../../../../objects/menu';
 import {replaceDynamicParamInHref} from '../../../../funcs/helpers';
 
 const editActionHref = menu[7].children![1].otherHrefs!.edit.href;
 
-const IndexListing = ({data}: UsersIndexListingProps) => {
+const IndexListing = ({data}: RolesIndexListingProps) => {
   log('Roles table rendered', data);
   const [page, setPage] = React.useState(0);
 

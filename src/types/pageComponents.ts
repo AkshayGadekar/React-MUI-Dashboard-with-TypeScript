@@ -53,6 +53,14 @@ export interface AddPermissionProps extends WithAxiosProps {
     }
 }
 
+export interface RolesIndexListingProps extends TableProps {
+    
+}
+
+export interface MessagingIndexListingProps extends TableProps {
+    
+}
+
 export interface MessagingAddNewProps extends WithAxiosProps {
     open: boolean,
     close: () => void,

@@ -57,7 +57,7 @@ const AudioPlayer = (props: AudioPlayerProps) => {
             <audio ref={audioRef} onTimeUpdate={updateTime} style={{display: 'none'}}>
                 <source src={props.url} type="audio/wav" />
             </audio>
-            <Box display="flex" alignItems={"center"} width={'90%'}>
+            <Box display="flex" alignItems={"center"} width={'100%'}>
                 <Box bgcolor={'primary.main'} width="25px" 
                     sx={{borderTopLeftRadius: 6, borderBottomLeftRadius: 6, borderRight: '1px solid rgba(0,0,0,.2)', 
                     cursor: 'pointer', '&:hover': {opacity:'.9'}}}
@@ -75,12 +75,12 @@ const AudioPlayer = (props: AudioPlayerProps) => {
                 <Box bgcolor={'grey.300'} alignSelf={"normal"} position="relative"
                     sx={{borderTopRightRadius: 6, borderBottomRightRadius: 6, flexGrow: 1}}>
                     <Box position="absolute" width="0%" height="100%" bgcolor={'rgba(0,0,0,.1)'} top={0} sx={{transition: 'width .5s', borderTopRightRadius: 6, borderBottomRightRadius: 6}} ref={audioLoaderRef}></Box>
-                    <Box component="span" display="inline-block" width='calc(100% - 123px)' position="relative" zIndex={100} pl={1} sx={{top: '2px', float: "left", 
+                    <Box component="span" display="inline-block" maxWidth='calc(100% - 150px)' position="relative" zIndex={100} pl={1} sx={{top: '2px', float: "left", 
                         ...noWrap}}>{props.fileName}</Box>
                     <Box component="span" display="inline-block" width='23px' position="relative" zIndex={100} pr={1} sx={{top: '5px', float: "right"}} >
                         <CircularProgress size={15} sx={{float: 'right', visibility: ((audioPlaying && !audioPlayingHasStarted) ? 'visible': 'hidden')}} />
                     </Box>
-                    <Box component="span" display="inline-block" width='100px' position="relative" zIndex={100} pl={1} sx={{top: '2px', float: "right"}} ref={audioTimeRef}>00:00 / {formatSecondsAsTime(Math.floor(props.duration))}</Box>
+                    <Box component="span" display="inline-block" minWidth='100px' position="relative" zIndex={100} pl={1} sx={{top: '2px', float: "right"}} ref={audioTimeRef}>00:00 / {formatSecondsAsTime(Math.floor(props.duration))}</Box>
                 </Box>
             </Box>
         </>

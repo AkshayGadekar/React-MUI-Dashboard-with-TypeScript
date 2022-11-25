@@ -53,8 +53,6 @@ const DropFile = (props: DropFileProps) => {
         throw new Error('please upload only one audio file.');
       }
 
-      setDropped(true);
-
       const audio = files[0];
 
       const audioMaxSizeInMB = Number(process.env.REACT_APP_MAX_AUDIO_SIZE);
@@ -68,6 +66,8 @@ const DropFile = (props: DropFileProps) => {
       const fileSize = getSizeInMB(audio.size);
       setFileName(audio.name);
       setFileSize(fileSize);
+      
+      setDropped(true);
 
       const data = new FormData();
       data.append('message', audio);
@@ -80,8 +80,9 @@ const DropFile = (props: DropFileProps) => {
         const successResponse = res.data;
         log(successResponse);
         
-        props.setSnackbarInfo({message: 'Audio file has uploaded successfully.', severity: 'success'});
-        props.setShowSnackBar(true);
+        // props.setSnackbarInfo({message: 'Audio file has uploaded successfully.', severity: 'success'});
+        // props.setShowSnackBar(true);
+        props.processMessagingData(successResponse);
         
       }).catch((error) => {
           props.processAxiosError(error, props);
@@ -106,7 +107,7 @@ const DropFile = (props: DropFileProps) => {
         <Box onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={allowDrop} onDrop={drop} ref={uploadBoxRef} component="label" border={2} display="flex" flexDirection={'column'} justifyContent={'center'} borderColor={error == '' ? 'grey.300' : 'red'} width={'100%'} height={200}
           sx={{cursor: 'pointer', "&:hover": {backgroundColor: theme => `${theme.palette.grey['100']}!important`}}} >
             <Box display={dropped ? 'none' : 'block'}>
-              <Box color={'grey.600'} textAlign='center'>Drop files here to upload</Box>
+              <Box color={'grey.600'} textAlign='center'>Drop file here to upload</Box>
               <input type="file" style={{display: 'none'}} onChange={uploadFile} />
             </Box>
             <Box display={dropped ? 'flex' : 'none'} justifyItems={"space-between"} alignItems={"center"}>

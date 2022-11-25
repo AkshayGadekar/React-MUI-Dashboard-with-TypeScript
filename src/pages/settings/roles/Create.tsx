@@ -53,7 +53,7 @@ const Create = (props: RolesCreateProps) => {
         onClick: function (ev: React.FormEvent<HTMLFormElement>) {
             ev.preventDefault();
 
-            if (!nameError) {
+            if (!nameError && name != '') {
                 setIsProcessingRequest(true);
 
                 const accountUUID = userInfo.user.account.uuid;

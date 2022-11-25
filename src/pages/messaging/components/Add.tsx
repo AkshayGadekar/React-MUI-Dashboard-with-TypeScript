@@ -10,6 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DropFile from "../../../components/utilities/DropFile";
 import type {MessagingAddNewProps} from '../../../types/pageComponents';
 import withAxios from '../../../HOC/withAxios';
+import AudioPlayer from "../../../components/utilities/AudioPlayer";
 import Divider from '@mui/material/Divider';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -24,72 +25,131 @@ import { useAppSelector } from '../../../store/hooks';
 import CloseModal from "../../../components/utilities/CloseModal";
 
 const Add = (props: MessagingAddNewProps) => {
+    const [id, setId] = useState('');
+    const [duration, setDuration] = useState(0.0);
+    const [url, setUrl] = useState('');
+
+    const [name, setName] = useState('');
+    const [nameError, setNameError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const userInfo = useAppSelector(state => state.user);
+    const processMessagingData = (data: Record<string, any>) => {
+        setId(data._id);
+        setName(data.name);
+        setDuration(data.duration);
 
-    interface InitialValues {
-        first_name: string, last_name: string, email: string, role_id: number|"" ,
-        account_uuid: string, prevent_email: boolean, system_refer: string
+        const url = `${process.env.REACT_APP_BASE_URL_CALLQX}/audio${data.url}`;
+        setUrl(url);
     }
-    
-    const formik = useFormik<InitialValues>({
-        initialValues: {first_name: "", last_name: "", email: "", role_id: "",
-        account_uuid: userInfo.user.account.uuid, prevent_email: false, system_refer: userInfo.user.system_refer}, 
-        validateOnBlur: false, 
-        onSubmit: (values, formikBag) => {
+
+    const handleName = (ev: React.ChangeEvent<HTMLInputElement>) => {
+
+        const name = ev.target.value;
+
+        let error = false;
+        if (name == '') {
+            setNameError('Name is required');
+            error = true;
+        }
+        if (name.length > 50) {
+            setNameError('Name cannot exceed 50 characters.');
+            error = true;
+        }
+
+        setName(name);
+        !error ? setNameError('') : '';
+    }
+
+    const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+        ev.preventDefault();
+
+        if (!nameError && name != '' && id != '') {
+            setIsLoading(true);
             
-            props.authAxios({...props.apiEndPoints.users.addUser, data: values}).then((res) => {
-                
+            const data = {name};
+            props.authAxios({...props._(props.apiEndPoints.messages.createMessage, {id: id}), data})
+            .then((res) => {
+
                 const successResponse = res.data;
                 log('successResponse', successResponse);
-
-                props.setParentState.setSnackbarInfo({message: 'User created successfully', severity: 'success'});
+                
+                props.setParentState.setSnackbarInfo({message: 'Message created successfully', severity: 'success'});
                 props.setParentState.setShowSnackBar(true);
                 props.setParentState.setMessagesCreatedCount(count => count + 1);
                 
-            }).catch((error) => {
-                props.processAxiosError<InitialValues>(error, props, formik);
-            }).finally(() => {
-                formikBag.setSubmitting(false);
+            })
+            .catch((error) => {
+                props.processAxiosError(error, props);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
-
-        },
-        validationSchema: Yup.object({
-            first_name: Yup.string().required().min(1).max(50),
-            last_name: Yup.string().required().min(1).max(50),
-            email: Yup.string().required().email(),
-            role_id: Yup.number().typeError('role_id is a required field').required()
-        })
-    });
-
-    const FirstNameTouchedError = (formik.touched.first_name && formik.errors.first_name)?true:false;
-    const LastNameTouchedError = (formik.touched.last_name && formik.errors.last_name)?true:false;
-    const EmailTouchedError = (formik.touched.email && formik.errors.email)?true:false;
-    const RoleTouchedError = (formik.touched.role_id && formik.errors.role_id)?true:false;
+        }
+    }
 
     log('Messaging AddNew rendered');
 
     return (
         <Box>
-            <Dialog open={props.open} onClose={props.close} fullWidth maxWidth='lg'>
+            <Dialog open={props.open} onClose={props.close} fullWidth maxWidth='sm'>
                 <CloseModal close={props.close} />
                 <Typography variant="h6" p={3}>Custom Messaging</Typography>
                 <Divider />
                 <DialogContent>
-                    <form id="CreateMessagingForm" onSubmit={formik.handleSubmit}>
+                    <form id="CreateMessagingForm" onSubmit={handleSubmit}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <DropFile />
+                                {
+                                    !id 
+                                    ? <DropFile processMessagingData={processMessagingData} />
+                                    : <AudioPlayer fileName={name} url={url} duration={duration} />
+                                }
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    fullWidth
+                                    id="id"
+                                    label="Id"
+                                    type="text"
+                                    variant="filled"
+                                    value={id}
+                                    disabled
+                                    name="id"
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    fullWidth
+                                    id="name"
+                                    label="Name"
+                                    type="text"
+                                    variant="outlined"
+                                    value={name}
+                                    name="name"
+                                    onChange={handleName}
+                                    error={!!nameError}
+                                    helperText={nameError}
+                                />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    fullWidth
+                                    id="duration"
+                                    label="Duration"
+                                    type="text"
+                                    variant="filled"
+                                    value={duration}
+                                    disabled
+                                    name="duration"
+                                />
                             </Grid>
                         </Grid>
                     </form>
                 </DialogContent>
                 <Divider />
                 <DialogActions sx={{pr: 3}}>
-                    <Button type="submit" form="CreateUserForm" variant="contained" sx={{color: '#fff'}}
-                    disabled={!(formik.dirty && formik.isValid) || formik.isSubmitting}>
-                        {!formik.isSubmitting ? "Save" : <CircularProgress color="inherit" size={26} />}
+                    <Button type="submit" form="CreateMessagingForm" variant="contained" sx={{color: '#fff'}} disabled={isLoading}>
+                        {!isLoading ? "Save" : <CircularProgress color="inherit" size={26} />}
                     </Button>
                 </DialogActions>
             </Dialog>

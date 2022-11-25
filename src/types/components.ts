@@ -101,5 +101,5 @@ export interface AudioPlayerProps {
 }
 
 export interface DropFileProps extends WithAxiosProps {
-    
+    processMessagingData: (data: Record<string, any>) => void 
 }
