@@ -18,7 +18,7 @@ const Drawer = ({container, mobileOpen, handleDrawerToggle, hideDrawer}: DrawerP
   const DrawerMenus = (
     <Box>
       <Toolbar>
-        <Box component="img" src={"https://callqx-portal.ecosmob.net/static/img/logo.svg"} 
+        <Box component="img" src={process.env.REACT_APP_LOGO} 
         sx={{width: "75%"}} ></Box>
       </Toolbar>
       <Divider />
