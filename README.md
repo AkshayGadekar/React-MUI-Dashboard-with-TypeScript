@@ -1,7 +1,7 @@
 # React Material UI Custom Dashboard with Typescript
 
 ## Dashboard
-![alt text](https://github.com/AkshayGadekar/React-MUI-Custom-Dashboard/blob/master/src/media/images/logo.svg)
+![Dashboard UI](https://github.com/AkshayGadekar/React-MUI-Custom-Dashboard/blob/master/src/media/images/dashboard.png)
 
 This is custom dashboard built using react material UI. It has following added functionalities:
 - User Authentication
