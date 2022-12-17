@@ -13,12 +13,13 @@ import MenuItem from '../utilities/MenuItem';
 import {drawerWidth} from "../../objects/objects";
 import type {DrawerProps} from "../../types/components";
 import {log} from "../../funcs/helpers";
+import logo from "../../media/images/logo.svg";
 
 const Drawer = ({container, mobileOpen, handleDrawerToggle, hideDrawer}: DrawerProps) => {
   const DrawerMenus = (
     <Box>
       <Toolbar>
-        <Box component="img" src={process.env.REACT_APP_LOGO} 
+        <Box component="img" src={logo} 
         sx={{width: "75%"}} ></Box>
       </Toolbar>
       <Divider />
