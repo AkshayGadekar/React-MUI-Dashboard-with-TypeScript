@@ -74,19 +74,19 @@ const DropFile = (props: DropFileProps) => {
 
       const progressBarNode = progressBarRef.current;
 
-      props.authAxios({...props.apiEndPoints.messages.uploadAudio, data, progressBarNode: progressBarNode!})
-      .then((res) => {
+      // props.authAxios({...props.apiEndPoints.messages.uploadAudio, data, progressBarNode: progressBarNode!})
+      // .then((res) => {
                 
-        const successResponse = res.data;
-        log(successResponse);
+      //   const successResponse = res.data;
+      //   log(successResponse);
         
-        // props.setSnackbarInfo({message: 'Audio file has uploaded successfully.', severity: 'success'});
-        // props.setShowSnackBar(true);
-        props.processMessagingData(successResponse);
+      //   // props.setSnackbarInfo({message: 'Audio file has uploaded successfully.', severity: 'success'});
+      //   // props.setShowSnackBar(true);
+      //   props.processMessagingData(successResponse);
         
-      }).catch((error) => {
-          props.processAxiosError(error, props);
-      })
+      // }).catch((error) => {
+      //     props.processAxiosError(error, props);
+      // })
       
     } catch (error) {
       

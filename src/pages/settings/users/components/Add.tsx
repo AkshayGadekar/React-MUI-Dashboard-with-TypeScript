@@ -44,7 +44,7 @@ const Add = (props: UsersAddNewProps) => {
                 const successResponse = res.data;
                 log('successResponse', successResponse);
 
-                props.setParentState.setSnackbarInfo({message: 'User created successfully', severity: 'success'});
+                props.setParentState.setSnackbarInfo({message: 'User created successfully', duration: 100000, severity: 'success'});
                 props.setParentState.setShowSnackBar(true);
                 props.setParentState.setUsersCreatedCount(count => count + 1);
                 
