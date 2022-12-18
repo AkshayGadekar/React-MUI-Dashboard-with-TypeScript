@@ -21,10 +21,10 @@ This is custom dashboard built using react material UI. It has following added f
 and many more...
 
 Following `menus` are given as working menu:
-- Nodes
-- Messaging
-- Users
-- Roles
+- `Nodes`
+- `Messaging`
+- `Users`
+- `Roles`
 
 Login Credentials:
 - Username: `jfennell@callqx.com`
