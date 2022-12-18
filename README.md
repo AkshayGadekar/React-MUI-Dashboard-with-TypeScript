@@ -27,8 +27,8 @@ Following `menus` are given as working menu:
 - Roles
 
 Login Credentials:
-Username: jfennell@callqx.com
-password: secret 
+- Username: jfennell@callqx.com
+- password: secret 
 
 APIs used inside are dummy APIs, just given for example, they can deprecate anytime... 
 
