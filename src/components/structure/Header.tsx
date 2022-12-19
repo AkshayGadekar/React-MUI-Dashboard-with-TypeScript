@@ -55,6 +55,9 @@ const UserMenu = () => {
   };
   const logout = () => {
     handleClose();
+
+    //call logout API
+
     dispatch(loggedIn(false));
   };
 
