@@ -46,7 +46,8 @@ export interface ApiEndPoints {
     messages: {
         'list': Record<string, any>
         'uploadAudio': Record<string, any>
-        'createMessage': Record<string, any>
+        'create': Record<string, any>
+        'delete': Record<string, any>
     },
     users: {
         'list': Record<string, any>

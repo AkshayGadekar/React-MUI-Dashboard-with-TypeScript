@@ -67,7 +67,7 @@ const Index = (props: MessagesIndexProps) => {
           <Breadcrumb path={breadCrumb} />
           <Heading title="Messages" button={messagesButton} />
           <Add open={openDialog} close={() => setOpenDialog(false)} setParentState={setParentState} />
-          <IndexListing data={data} />
+          <IndexListing data={data} setParentState={setParentState} />
         </>
       }
     </Box>

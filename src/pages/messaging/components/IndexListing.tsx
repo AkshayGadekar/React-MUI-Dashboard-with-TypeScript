@@ -10,10 +10,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import type {MessagingIndexListingProps} from '../../../types/pageComponents';
 import AudioPlayer from "../../../components/utilities/AudioPlayer";
 import Add from './Add';
+import withAxios from '../../../HOC/withAxios';
 
-const IndexListing = ({data}: MessagingIndexListingProps) => {
+const IndexListing = (props: MessagingIndexListingProps) => {
   log('Messaging rendered');
   const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false)
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogInfo, setDialogInfo] = useState({});
 
@@ -21,8 +23,33 @@ const IndexListing = ({data}: MessagingIndexListingProps) => {
     setPage(newPage);
   }
 
+  const deleteMessage = (id: number, ev: React.BaseSyntheticEvent) => {    
+    ev.target.disabled = true;
+    ev.target.classList.add("Mui-disabled");
+    setIsLoading(true);
+
+    const apiEndPoint = props._(props.apiEndPoints.messages.delete, {id});
+
+    props.authAxios({...apiEndPoint}).then((res) => {
+        
+        const successResponse = res.data;
+        log('successResponse', successResponse);
+        
+        props.setParentState.setSnackbarInfo({message: 'Message deleted successfully', severity: 'success'});
+        props.setParentState.setShowSnackBar(true);
+        props.setParentState.setMessagesCreatedCount(count => count - 1);
+        
+    }).catch((error) => {
+        props.processAxiosError(error, props);
+    }).finally(() => {
+        ev.target.disabled = false;
+        ev.target.classList.remove("Mui-disabled");
+        setIsLoading(false);
+    })
+  }
+
   const rows = [
-    ...data
+    ...props.data
   ];
 
   const columns = useMemo(() => {
@@ -38,11 +65,9 @@ const IndexListing = ({data}: MessagingIndexListingProps) => {
       { field: 'duration', headerName: 'Duration', sortable: false, minWidth: 100, },
       { field: 'actions', headerName: 'Actions', sortable: false, minWidth: 250, flex: 1,
         renderCell: params =>  {
-          const editBtn = <Button size="small" color="primary" sx={{color: "#fff", mr: 1}} variant="contained" onClick={() => log('Edit btn')}>Edit</Button>;
-          const deleteBtn = <Button size="small" color="error" sx={{color: "#fff"}} variant="contained" onClick={() => log('Delete btn')}>Delete</Button>;
+          const deleteBtn = <Button size="small" color="error" sx={{color: "#fff"}} variant="contained" onClick={deleteMessage.bind(this, params.row.id)}>Delete</Button>;
           return (
               <>
-                  {editBtn}
                   {deleteBtn}
               </>
           )
@@ -67,6 +92,7 @@ const IndexListing = ({data}: MessagingIndexListingProps) => {
         onPageChange={(newPage) => handlePageChange(newPage)}
         disableSelectionOnClick
         disableColumnMenu
+        loading={isLoading}
       />
   );
 
@@ -77,4 +103,4 @@ const IndexListing = ({data}: MessagingIndexListingProps) => {
 );
 }
 
-export default IndexListing;
+export default withAxios(IndexListing);

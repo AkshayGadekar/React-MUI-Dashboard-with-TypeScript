@@ -63,7 +63,9 @@ authAxios.interceptors.request.use(async(req) => {
     
     log(req);
     //progressBar
-    req.showProgressBar == null ? req.showProgressBar = booleanString(process.env.REACT_APP_SHOW_PROGRESSBAR!): "";
+    if (req.showProgressBar == null) {
+        req.showProgressBar = booleanString(process.env.REACT_APP_SHOW_PROGRESSBAR!);
+    }
     req.onUploadProgress = (progressEvent) => {
         if (req.showProgressBar) {
             const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total!);

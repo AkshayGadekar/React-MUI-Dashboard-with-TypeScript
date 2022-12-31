@@ -59,11 +59,16 @@ const apiEndPoints: ApiEndPoints = {
             url: '/messages',
             showProgressBar: true
         },
-        'createMessage': {
+        'create': {
             baseURL: process.env.REACT_APP_BASE_URL_CALLQX,
             method: 'put',
             url: '/messages/{id}',
             showProgressBar: true
+        },
+        'delete': {
+            baseURL: process.env.REACT_APP_BASE_URL_CALLQX,
+            method: 'delete',
+            url: '/messages/{id}'
         }
     },
     users: {

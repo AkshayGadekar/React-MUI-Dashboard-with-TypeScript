@@ -57,8 +57,12 @@ export interface RolesIndexListingProps extends TableProps {
     
 }
 
-export interface MessagingIndexListingProps extends TableProps {
-    
+export interface MessagingIndexListingProps extends TableProps, WithAxiosProps {
+    setParentState: {
+        setSnackbarInfo: (x: SnackbarInfo) => void;
+        setShowSnackBar: (x: boolean) => void;
+        setMessagesCreatedCount: React.Dispatch<React.SetStateAction<number>>
+    }
 }
 
 export interface MessagingAddNewProps extends WithAxiosProps {

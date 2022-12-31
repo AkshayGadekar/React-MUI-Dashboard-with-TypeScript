@@ -67,7 +67,7 @@ const Add = (props: MessagingAddNewProps) => {
             setIsLoading(true);
             
             const data = {name};
-            props.authAxios({...props._(props.apiEndPoints.messages.createMessage, {id: id}), data})
+            props.authAxios({...props._(props.apiEndPoints.messages.create, {id: id}), data})
             .then((res) => {
 
                 const successResponse = res.data;
