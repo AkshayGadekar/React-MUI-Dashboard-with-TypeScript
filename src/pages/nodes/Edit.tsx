@@ -23,7 +23,7 @@ const Edit = (props: NodesEditProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<Record<string, any>>({});
 
-  const breadCrumb = menu[4].otherHrefs!.edit.breadCrumb;
+  const breadCrumb = menu[1].otherHrefs!.edit.breadCrumb;
 
   const param = useParams();
   const theme = useTheme();

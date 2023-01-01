@@ -74,3 +74,10 @@ export interface MessagingAddNewProps extends WithAxiosProps {
         setMessagesCreatedCount: React.Dispatch<React.SetStateAction<number>>
     }
 }
+
+export interface DeleteDialogProps {
+    open: boolean,
+    close: () => void,
+    deleteID: number,
+    deleteMessage: (id: number) => void
+}

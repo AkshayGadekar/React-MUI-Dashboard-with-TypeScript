@@ -19,7 +19,7 @@ const Index = (props: UsersIndexProps) => {
 
   const userInfo = useAppSelector(state => state.user);
 
-  const breadCrumb = menu[7].children![0].breadCrumb;
+  const breadCrumb = menu[3].children![0].breadCrumb;
 
   const buttonInfo = {
     value: 'Add New',

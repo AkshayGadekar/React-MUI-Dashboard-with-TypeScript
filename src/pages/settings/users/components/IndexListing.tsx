@@ -12,7 +12,7 @@ import type {UsersIndexListingProps} from '../../../../types/pageComponents';
 import menu from '../../../../objects/menu';
 import {replaceDynamicParamInHref} from '../../../../funcs/helpers';
 
-const editActionHref = menu[7].children![0].otherHrefs!.edit.href;
+const editActionHref = menu[3].children![0].otherHrefs!.edit.href;
 
 const IndexListing = ({data}: UsersIndexListingProps) => {
   log('Users table rendered', data);

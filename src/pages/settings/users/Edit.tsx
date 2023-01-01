@@ -29,7 +29,7 @@ import ShowPermissions from "./components/ShowPermissions";
 import menu from "../../../objects/menu";
 import {replaceDynamicParamInHref} from '../../../funcs/helpers';
 
-const editRoleActionHref = menu[7].children![1].otherHrefs!.edit.href;
+const editRoleActionHref = menu[3].children![1].otherHrefs!.edit.href;
 
 const Edit = (props: UsersEditProps) => {
 
@@ -52,7 +52,7 @@ const Edit = (props: UsersEditProps) => {
     setOpenDialog(false);
   };
 
-  const breadCrumb = menu[7].children![0].otherHrefs!.edit.breadCrumb;
+  const breadCrumb = menu[3].children![0].otherHrefs!.edit.breadCrumb;
 
   interface InitialValues {
     first_name: string, last_name: string, email: string, role_id: number

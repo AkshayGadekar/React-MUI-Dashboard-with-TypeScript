@@ -16,7 +16,7 @@ const Index = (props: NodesIndexProps) => {
 
   const userInfo = useAppSelector(state => state.user);
 
-  const breadCrumb = menu[4].breadCrumb!;
+  const breadCrumb = menu[1].breadCrumb!;
 
   useEffect(() => {
 

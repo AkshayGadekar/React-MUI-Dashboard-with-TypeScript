@@ -11,21 +11,21 @@ import type {MessagingIndexListingProps} from '../../../types/pageComponents';
 import AudioPlayer from "../../../components/utilities/AudioPlayer";
 import Add from './Add';
 import withAxios from '../../../HOC/withAxios';
+import DeleteDialog from './DeleteDialog';
 
 const IndexListing = (props: MessagingIndexListingProps) => {
   log('Messaging rendered');
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false)
   const [openDialog, setOpenDialog] = useState(false);
-  const [dialogInfo, setDialogInfo] = useState({});
+  const [deleteID, setDeleteID] = useState(0);
 
   const handlePageChange = (newPage: number): void => {
     setPage(newPage);
   }
 
-  const deleteMessage = (id: number, ev: React.BaseSyntheticEvent) => {    
-    ev.target.disabled = true;
-    ev.target.classList.add("Mui-disabled");
+  const deleteMessage = (id: number) => {    
+    setOpenDialog(false);
     setIsLoading(true);
 
     const apiEndPoint = props._(props.apiEndPoints.messages.delete, {id});
@@ -42,11 +42,14 @@ const IndexListing = (props: MessagingIndexListingProps) => {
     }).catch((error) => {
         props.processAxiosError(error, props);
     }).finally(() => {
-        ev.target.disabled = false;
-        ev.target.classList.remove("Mui-disabled");
         setIsLoading(false);
     })
   }
+
+  const openDeleteDialog = (id: number) => {
+    setOpenDialog(true);
+    setDeleteID(id);
+  };
 
   const rows = [
     ...props.data
@@ -65,7 +68,7 @@ const IndexListing = (props: MessagingIndexListingProps) => {
       { field: 'duration', headerName: 'Duration', sortable: false, minWidth: 100, },
       { field: 'actions', headerName: 'Actions', sortable: false, minWidth: 250, flex: 1,
         renderCell: params =>  {
-          const deleteBtn = <Button size="small" color="error" sx={{color: "#fff"}} variant="contained" onClick={deleteMessage.bind(this, params.row.id)}>Delete</Button>;
+          const deleteBtn = <Button size="small" color="error" sx={{color: "#fff"}} variant="contained" onClick={openDeleteDialog.bind(this, params.row.id)}>Delete</Button>;
           return (
               <>
                   {deleteBtn}
@@ -99,6 +102,7 @@ const IndexListing = (props: MessagingIndexListingProps) => {
   return (
     <Box sx={{backgroundColor: '#fff', boxShadow: theme => theme.shadows[1]}}>
         {datagrid}
+        <DeleteDialog open={openDialog} close={() => setOpenDialog(false)} deleteID={deleteID} deleteMessage={deleteMessage} />
     </Box>
 );
 }
