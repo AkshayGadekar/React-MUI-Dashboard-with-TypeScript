@@ -1,9 +1,11 @@
 # React Material UI Custom Dashboard with Typescript
 
 ## Dashboard
+
 ![Dashboard UI](https://github.com/AkshayGadekar/React-MUI-Custom-Dashboard/blob/master/src/media/images/dashboardUI.png)
 
 This is custom dashboard built using react material UI. It has following added functionalities:
+
 - User Authentication
 - Responsive Drawer
 - Menu Object to add new Menus
@@ -18,26 +20,28 @@ This is custom dashboard built using react material UI. It has following added f
 - formik for Form validations
 - Audio Player
 - Drop file upload
-and many more...
+  and many more...
 
 Following `menus` are given as working menu:
+
 - `Nodes`
 - `Messaging`
 - `Users`
 - `Roles`
 
 Login Credentials:
-- Username: `jfennell@callqx.com`
-- password: `secret` 
 
-APIs used inside are dummy APIs, just given for example, they can deprecate anytime... 
+- Username: `jfennell@callqx.com`
+- password: `secret`
+
+Note: APIs used inside are dummy APIs, just given for example, unfortunately API server is shut down now so APIs are commented in code and static response is shown...
 
 ## How to use
 
 Clone this repo and run:
+
 ```bash
 cd React-MUI-Dashboard-with-TypeScript
 npm install
 npm start
 ```
-
