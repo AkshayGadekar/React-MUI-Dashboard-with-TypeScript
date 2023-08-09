@@ -34,7 +34,7 @@ Login Credentials:
 - Username: `jfennell@callqx.com`
 - password: `secret`
 
-Note: APIs used inside are dummy APIs, just given for example, unfortunately API server is shut down now so APIs are commented in code and static response is shown...
+Note: APIs used inside are dummy APIs, just given for example, unfortunately API server is shut down now so APIs are commented in code and static responses are shown...
 
 ## How to use
 
