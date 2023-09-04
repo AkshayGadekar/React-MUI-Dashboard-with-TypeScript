@@ -31,7 +31,7 @@ Following `menus` are given as working menu:
 
 Login Credentials:
 
-- Username: `jfennell@callqx.com`
+- Username: `test@me.com`
 - password: `secret`
 
 Note: APIs used inside are dummy APIs, just given for example, unfortunately API server is shut down now so APIs are commented in code and static responses are shown...
